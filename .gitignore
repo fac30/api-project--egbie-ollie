@@ -1,0 +1,9 @@
+
+# Exclude the 'node_modules' directory to prevent including 
+# installed dependencies in version control.
+node_modules/
+
+# Exclude the '.gitignore' file itself from version control,
+# as changes to this file are often specific to local
+# development environments and not intended for sharing.
+.gitignore
