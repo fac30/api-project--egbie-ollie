@@ -1,0 +1,9 @@
+.container {
+    width: 50%;
+    margin: auto;
+}
+
+.main-picture {
+    height: 600px;
+    width: 600px;
+}
