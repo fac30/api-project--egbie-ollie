@@ -1,11 +1,12 @@
 {
+  "type": "module",
   "name": "api-project--egbie-ollie",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon static/scripts/server.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
