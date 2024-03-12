@@ -1,9 +1,298 @@
-.container {
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+:root {
+
+    --box-shadow-primary: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    --primary-footer-color:#3c3c3b;
+    --primary-footer-seconday-color: hsla(0,0%,13%,1);
+    --background-color-primary:#6767a3;
+
+    --font-xsm: 8px;
+    --font-sm: 16px;
+    --font-md: 20px;
+    --font-lg: 30px;
+
+
+    --padding-lg: 60px;
+    --padding-md: 40px;
+    --padding-sm: 30px;
+    --padding-xsm: 20px;
+
+    --margin-xsm: 20px;
+    --margin-sm: 30px;
+    --margin-md: 40px;
+    --margin-lg: 60px;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    transition: 0.5s ease;
+}
+
+
+body {
+    overflow-x: hidden;
+    font-family: "Roboto", sans-serif;
+}
+
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+main {
+    height: 100vh;
+}
+
+/* The navigation section */
+.nav-head {
+    gap: 200px;
+    border-top: 3px solid lavender;
+    background: lavender;
+    margin-top: 3px;
+}
+
+.nav-body {
+
+    gap: 50px;
+    background: var(--background-color-primary);
+    box-shadow: var(--box-shadow-primary);
+}
+
+.nav-link {
+    color: white;
+}
+.nav-link:hover {
+    text-decoration: underline;
+    transition: width 0.5s ease;
+    color: black;
+}
+
+
+
+/* The fonts */
+
+.anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .berkshire-swash-regular {
+    font-family: "Berkshire Swash", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+/* The flex */ 
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+/* colors */
+.white-text {
+    color: white;
+}
+
+
+/* The font sizes */
+
+.font-xsm {
+    font-size: var(--font-xsm);
+}
+.font-sm {
+    font-size: var(--font-sm);
+}
+
+.font-md {
+    font-size: var(--font-md);
+}
+
+.font-lg {
+    font-size: var(--font-lg);
+}
+
+/* The paddings */
+.padding-top-lg {
+    padding-top: var(--padding-lg);
+}
+
+.padding-bottom-lg {
+    padding-bottom: var(--padding-lg);
+}
+
+.padding-top-md {
+    padding-top: var(--padding-md);
+}
+
+.padding-bottom-md {
+    padding-bottom: var(--padding-md);
+}
+
+.padding-top-sm {
+    padding-top: var(--padding-sm);
+}
+
+.padding-bottom-sm {
+    padding-bottom: var(--padding-sm);
+}
+
+.padding-top-xsm {
+    padding-top: var(--padding-xsm);
+}
+
+.padding-bottom-xsm {
+    padding-bottom: var(--padding-xsm);
+}
+
+/* 
+The margins */
+.margin-top-sm {
+    margin-top: var(--margin-sm);
+}
+
+.margin-bottom-sm {
+    margin-bottom: var(--margin-sm);
+}
+
+
+.margin-top-md {
+    margin-top: var(--margin-md);
+}
+
+.margin-bottom-md {
+    margin-top: var(--margin-md);
+}
+
+
+.margin-top-lg {
+    margin-top: var(--margin-lg);
+}
+
+.margin-bottom {
+    margin-bottom: var(--margin-lg);
+}
+
+/* utilies */
+.text-upper {
+    text-transform: uppercase;
+}
+
+/* buttons */
+.button-sm {
+    padding: 16px;
+    font-size: 14px;
+    width: 25%;
+}
+
+
+/* icons */
+.icon {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.icon:hover {
+    transform: rotateX(360deg);
+}
+
+
+/* The main movie */
+
+
+.search {
+    text-align: center;
+}
+.search__bar {
     width: 50%;
+    height: 40px;
+    text-align: center;
+    font-size: var(--font-md);
+}
+
+.search-btn {
+    height: 40px;
+    padding: 2px;
+}
+
+
+
+
+.subscription h1 {
+    text-transform: capitalize;
+}
+
+
+.subtitles {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+
+/* The footer elements begin here */
+
+footer {
+    background: var(--primary-footer-color);
+}
+
+footer .container .services a,
+footer .container .links a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: white;
+}
+
+
+footer .container > div,
+.policies__wrapper {
+    width: 80%;
     margin: auto;
 }
 
-.main-picture {
-    height: 600px;
-    width: 600px;
+.policies__wrapper {
+    display: flex;
+    gap: 20px;
 }
+
+
+.policies {
+    background:black;
+}
+.policies a {
+    color: white;
+    display: flex;
+    gap: 10px;
+}
+
+
+.social-icons a {
+    color: white;
+}
+
+
