@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/styles.css">
-    <script src="static/js/script.js" defer></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/static/js/script.js" defer type="module"></script>
     <title>Clever name</title>
 </head>
+
 <body>
-    
-    <nav class="container">
+    <div class="banner">
+        <img src="image/moving-banner.gif" alt="A moving banner image">
+    </div>
+    <nav class="nav-container">
         <div class="nav-head flex-center padding-top-sm padding-bottom-sm">
             <div class="logo">
                 logo
@@ -20,7 +24,7 @@
             </div>
 
             <div class="header-footer">
-                <img src="static/image/alternate-sign-in.svg" alt="A login image" class="icon">
+                <img src="/image/alternate-sign-in.svg" alt="A login image" class="icon">
                 <span>login</span>
             </div>
         </div>
@@ -45,15 +49,460 @@
             <div class="container">
 
                 <div class="search">
-                    <input type="search" name="search" id="search" class="search__bar margin-top-sm">
-                    <button type="submit" class="search-btn">Search</button>
+                    <form action="/movies" method="post" required>
+                        <input type="search" name="search" id="search" class="search__bar margin-top-sm">
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
                 </div>
-            
-                <div class="search-result">
-                    <p id="joke"></p>
+
+                <div class="box">
+                    <h1 class="left padding-top-lg">Trending</h1>
                 </div>
-               
-               
+
+                <div class="trending">
+
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="trending-movie-card">
+                        <div class="header">
+                            <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    
+
+
+                </div>
+
+
+                <div class="joke-of-day">
+
+                    <img src="image/Black Live Movie Stream YouTube Banner.gif" alt="movie image" class="joke-image">
+
+
+                </div>
+
+                <div class="box">
+                    <h1 class="left padding-top-lg">What's popular?</h1>
+                </div>
+
+                <div class="popular">
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="popular-movie-card">
+                        <div class="header">
+                            <img src="image/t1.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+                <div class="box">
+                    <h1 class="left padding-top-lg">TV</h1>
+                </div>
+
+                <div class="TV">
+
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-card">
+                        <div class="header">
+                            <img src="image/t2.jpg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="box">
+                    <h1 class="left padding-top-lg">TV series</h1>
+                </div>
+
+                <div class="TV-series">
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+                    <div class="TV-series-card">
+                        <div class="header">
+                            <img src="image/t3.jpeg" alt="movie" class="movie-img">
+                        </div>
+                        <div class="body">
+                            <p class="font-sm">Movie title</p>
+                            <p class="">Release year</p>
+                        </div>
+                        <div class="vote-average center">
+                            <span class="voting">10</span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,8 +523,9 @@
 
                 <div class="subscription flex-col">
                     <h1 class="anton-regular white-text berkshire-swash-regular">Some clever name here</h1>
-                    <p class="subtitle white-text padding-top-md">Sign up to our newsletter for special bribes, incentives and Everyman listings each week.</p>
-                     <button type="button" class="text-upper button-sm margin-top-sm">Join for free</button>
+                    <p class="subtitle white-text padding-top-md">Sign up to our newsletter for special bribes,
+                        incentives and Everyman listings each week.</p>
+                    <button type="button" class="text-upper button-sm margin-top-sm">Join for free</button>
                 </div>
 
                 <div class="links flex-col">
@@ -91,16 +541,16 @@
                 <div class="socials">
 
                     <div class="social-icons padding-top-sm">
-                       <img src="static/image/instagram.svg" alt="" srcset="" class="icon">
-                       <img src="static/image/facebook (1).svg" alt="" class="icon">
-                       <img src="static/image/whatsapp.svg" alt="" class="icon">
-                       <img src="static/image/twitter-original (1).svg" alt="" class="icon">
+                        <img src="/image/instagram.svg" alt="" srcset="" class="icon">
+                        <img src="/image/facebook (1).svg" alt="" class="icon">
+                        <img src="/image/whatsapp.svg" alt="" class="icon">
+                        <img src="/image/twitter-original (1).svg" alt="" class="icon">
 
                     </div>
                 </div>
 
             </div>
-        
+
 
         </div>
         <div class="policies padding-top-xsm padding-bottom-xsm">
@@ -109,11 +559,12 @@
                 <a href="#">© Terms and Conditions</a>
                 <a href="#">Cookie Policy</a>
             </div>
-               
+
         </div>
 
 
     </footer>
 
 </body>
+
 </html>
