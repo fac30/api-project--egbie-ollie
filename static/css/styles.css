@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
 
@@ -10,20 +11,23 @@
     --background-color-primary:#6767a3;
 
     --font-xsm: 8px;
-    --font-sm: 16px;
+    --font-sm: 15px;
     --font-md: 20px;
     --font-lg: 30px;
 
 
     --padding-lg: 60px;
     --padding-md: 40px;
-    --padding-sm: 30px;
+    --padding-sm: 10px;
     --padding-xsm: 20px;
 
     --margin-xsm: 20px;
     --margin-sm: 30px;
     --margin-md: 40px;
     --margin-lg: 60px;
+    --margin-xlg: 100px;
+
+    --width-global: 90%;
 }
 
 * {
@@ -37,6 +41,7 @@
 body {
     overflow-x: hidden;
     font-family: "Roboto", sans-serif;
+  
 }
 
 
@@ -46,11 +51,17 @@ a {
 }
 
 
-main {
-    height: 100vh;
+main  {
+    height: auto;
+    /* margin: auto; */
 }
 
 /* The navigation section */
+.nav-container {
+    width: 90%;
+    margin: auto;
+}
+
 .nav-head {
     gap: 200px;
     border-top: 3px solid lavender;
@@ -87,6 +98,18 @@ main {
   .berkshire-swash-regular {
     font-family: "Berkshire Swash", serif;
     font-weight: 400;
+    font-style: normal;
+  }
+
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
     font-style: normal;
   }
   
@@ -194,14 +217,36 @@ The margins */
     margin-top: var(--margin-lg);
 }
 
+
+.margin-top-xlg {
+    margin-top: var(--margin-xlg);
+}
+
 .margin-bottom {
     margin-bottom: var(--margin-lg);
 }
 
 /* utilies */
+
+.center {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    text-align: left;
+    justify-content: left;
+}
 .text-upper {
     text-transform: uppercase;
 }
+
+.box {
+    width: var(--width-global);
+    margin: auto;
+}
+
 
 /* buttons */
 .button-sm {
@@ -296,3 +341,114 @@ footer .container > div,
 }
 
 
+
+/* The movie page height */
+
+#movie-content .container {
+    width: 95%;
+    /* margin: auto; */
+}
+
+.movie-img {
+    height: 225px;
+    width: 150px;
+    border-radius: 4%;
+    /* box-shadow: var(--box-shadow-primary); */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    cursor: pointer;
+    border: 2px solid lavender;
+   
+  }
+
+  .movie-img:hover {
+    opacity: 0.9;
+  }
+
+  .movies {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    width: 77%;
+    gap: 4px;
+    margin: auto;
+    
+  }
+
+  .popular,
+  .trending,
+  .TV,
+  .TV-series {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+   
+    width: 90%;
+    gap: 1px;
+    margin: auto;
+    margin-bottom: var(--margin-xlg);
+
+  }
+
+  .movie-card,
+  .trending-movie-card,
+  .popular-movie-card,
+  .TV-card,
+  .TV-series-card {
+    margin-top: 6px;
+    position: relative;
+  }
+
+  .movie-card .voting-avearage,
+  .trending-movie-card .voting-avearage,
+  .popular-movie-card .voting-average {
+    position: absolute;
+   
+  }
+.voting {
+    background: #6767a3;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    border: 4px solid white;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    position: absolute;
+    top: 0px;
+}
+  
+
+  .movies > .movie-card {
+    
+    padding-bottom: var(--padding-lg);
+  }
+
+
+  /* The image banner */
+  .banner {
+    width: 90%;
+    height: 300px;
+    margin: auto;
+  }
+
+  .banner img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  .joke-of-day {
+    width: 86%;
+    height: 360px;
+    margin: auto;
+    /* padding-top: var(--padding-lg); */
+    
+  }
+
+  .joke-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
