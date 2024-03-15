@@ -431,6 +431,7 @@ footer .container > div,
     width: 90%;
     height: 300px;
     margin: auto;
+    margin-top: 2px;
   }
 
   .banner img {
