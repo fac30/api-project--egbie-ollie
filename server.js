@@ -1,31 +1,39 @@
 import fetch from "node-fetch"; // for HTTP requests
 import express from "express"; // for HTTP requests
-import path from "path";
+import bodyParser from "body-parser";
 import { fileURLToPath } from 'url';
 
 // Workaround for __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve static files from the "static" directory
-app.use(express.static(path.join(__dirname, "static")));
+app.use(bodyParser.urlencoded({extended: true }));
+app.use(express.static("static"));
 
-// Route to handle requests for jokes
-app.get("/joke", async (req, res) => {
+// Route to handle search submission
+app.get("/search", async (req, res) => {
+  const searchTerm = req.query.searchTerm; 
+
   try {
-    // Request to JokeAPI
-    const response = await fetch("https://v2.jokeapi.dev/joke/Any?contains=pint");
+    // Make a request to the JokeAPI with the search term
+    const response = await fetch(`https://v2.jokeapi.dev/joke/Any?contains=${searchTerm}`);
     const data = await response.json();
-    const joke = data.contents.jokes[0].joke.text;
+    console.log(data); // Log response for debugging 
 
-    // Send the joke back as JSON
-    res.json({ joke });
+    // Check if response contains jokes
+    if (!data.setup || !data.delivery) {
+      throw new Error("Failed to fetch jokes");
+    }
+
+    // Send the jokes back to the client
+    console.log({ setup: data.setup, delivery: data.delivery }); // Log before sending
+    res.json({ type: data.type, setup: data.setup, delivery: data.delivery });
   } catch (error) {
-    console.error("Error fetching joke:", error);
-    res.status(500).json({ error: "Failed to fetch joke" });
+    console.error("Error fetching jokes:", error);
+    res.status(500).json({ error: "Failed to fetch jokes" });
   }
 });
 
