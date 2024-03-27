@@ -1,0 +1,77 @@
+<%- include('../partials/header/header.ejs', {title: "Movie page" }) %>
+
+<body>
+
+    <%- include('../partials/header/nav.ejs') %>
+
+      <!-- The main section starts here -->
+      <main>
+
+        <section id="movie-content">
+
+            <div class="container">
+
+                <div class="search">
+                    <form action="/movies" method="post" required>
+                        <input type="search" name="search" id="search" class="search__bar margin-top-sm">
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
+
+                </div>
+
+                <h1 class="padding-bottom-sm padding-top-sm center">Movies</h1>
+
+                <% if (searchQuery) {%> 
+                    <p class="center">Search term: <%= searchQuery %>
+                <% } else { %>
+                    <p class="center">No results found by that query</p>
+                <%} %>
+                
+                </p>
+
+                <div class="movies padding-top-lg">
+
+                    <% if (movies) { %>
+                        <% movies.results.forEach(function(movie) { %>
+                            <div class="movie-card poppins-thin">
+                                <div class="header">
+                                    <% if (movie.poster_path) { %>
+                                        <a href="/detail/<%= movie.id %>"><img src="<%= url + movie.poster_path %>" alt="movie" class="movie-img">
+                                        </a>
+                                        <% } else { %>
+                                            <img src="image/no-image.jpg" alt="movie" class="movie-img">
+                                            <% } %>
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">
+                                        <%= movie.title %>
+                                    </p>
+                                    <p class="">
+                                        <%= movie.release_date %>
+                                    </p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">
+                                        <%=movie.vote_average %>
+                                    </span>
+                                </div>
+                            </div>
+                            <% }); %>
+                                <% } else { %>
+                                    <P>No item found by that name</P>
+                                    <% } %>
+
+
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+    <!-- The mains end here -->
+
+    <%- include('../partials/footer/footer.ejs') %>
+
+</body>
+</html>

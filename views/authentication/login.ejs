@@ -1,0 +1,64 @@
+<%- include('../partials/header/header.ejs', {title: "Login page" }) %>
+
+    <body>
+
+        <!-- The main section starts here -->
+
+        <main>
+            <section id="login">
+                <div class="info-banner padding-top-sm padding-bottom-sm center white-text">
+                    <p>Enter our site where wonders await thee. Don't have an account click here 
+                       
+                    </p>
+                    <p> <a href="/register" class="white-text">Register</a></p>
+
+                </div>
+                <div class="spinner">
+                </div>
+                <div class="container margin-bottom">
+
+                    <div class="site-form">
+                        <div
+                            class="header-banner center padding-bottom-sm padding-top-sm anton-regular white-text font-md">
+                            login form</div>
+                        <div class="login-img center">
+                            <img src="image/login-img.jpg" alt="login-img" class="login-pic">
+                        </div>
+                        <div class="warning-text registration-errors" id="registration-errors">
+
+                            <% if (invalid) { %>
+                                <p class="form-error center"><%= invalid %></p>
+                            <% } %>
+                        </div>
+                        <form action="/login" method="post" class="login-form">
+
+                            <div class="form-group flex-col">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" class="username-field" required>
+                            </div>
+
+
+                            <div class="form-group flex-col">
+                                <label for="username">Password</label>
+                                <input type="password" name="password" id="password" class="password-field" required>
+                            </div>
+
+                            <button type="submit" class="login-btn button-md">Login</button>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- The footer starts here -->
+        <%- include('../partials/footer/footer.ejs') %>
+
+
+    </body>
+</html>

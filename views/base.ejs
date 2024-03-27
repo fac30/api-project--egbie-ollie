@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer type="module"></script>
+    <title><%= title %></title>
+</head>
+
+<body>
+    <div class="banner">
+        <img src="image/moving-banner.gif" alt="A moving banner image">
+    </div>
+
+    <!-- The navbar section starts here -->
+
+   
+    <%- include('partials/header/nav-index.ejs') %>
+
+
+    
+
+
+    <!-- The main section starts here -->
+
+    <main>
+        <%= body %>
+    </main>
+
+
+
+    <!-- The footer starts here -->
+    <%- include('partials/footer/footer.ejs') %>
+  
+    
+</body>
+
+</html>
