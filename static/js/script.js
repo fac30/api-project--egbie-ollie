@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to handle form submission
     const handleFormSubmit = async (event) => {
+        console.log("Submit happened")
         event.preventDefault(); // Prevent the default form submission behavior
 
         const searchTerm = searchInput.value; // Get the search term from the input field
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(`/search?searchTerm=${encodeURIComponent(searchTerm)}`, {
                 method: "GET"
             });
+            console.log(`response: ${response}`)
 
             if (!response.ok) {
                 throw new Error("Failed to fetch joke");

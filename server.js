@@ -17,6 +17,7 @@ app.use(express.static("public"));
 // Route to handle search submission
 app.get("/search", async (req, res) => {
   const searchTerm = req.query.searchTerm; 
+  console.log(`searchTerm: ${searchTerm}`)
 
   try {
     // Make a request to the JokeAPI with the search term
