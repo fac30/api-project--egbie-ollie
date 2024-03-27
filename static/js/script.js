@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (error) {
             console.error("Error fetching joke:", error);
-            jokeElement.textContent = "Failed to fetch joke";
+            jokeElement.textContent = "Sorry, we couldn't find a relevant joke!";
         }
     };
 

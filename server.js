@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 // Serve static files from the "static" directory
 app.use(bodyParser.urlencoded({extended: true }));
 app.use(express.static("static"));
+app.use(express.static("public"));
 
 // Route to handle search submission
 app.get("/search", async (req, res) => {
