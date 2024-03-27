@@ -1,0 +1,53 @@
+<%- include('./partials/header/header.ejs', {title: "Landingn page" }) %>
+
+<body>
+   
+    <!-- The main section starts here -->
+    <main class="landing-page-main">
+        <div class="spinner">
+
+        </div>
+        <section id="landing-page">
+            <div class="title center padding-bottom-md font-lg  white-text text-upper padding-top-xlg">Who's watching?</div>
+            <div class="container flex-row">
+              
+                <div class="display-box flex-col">
+                    <img src="image/user.jpg" alt="A user image picture" class="landing-page-icon">
+                    <span class="text-capitalize"><%= userId %></span>
+                </div>
+
+                <div class="display-box">
+                    <img src="image/homepage.png" alt="A home page" class="landing-page-icon">
+                    <a href="/">Home</a>
+                </div>
+
+                <div class="display-box">
+                    <img src="image/watching.jpg" alt="A watching list pic" class="landing-page-icon">
+                    <a href="#">Watch list</a>
+                </div>
+
+                <div class="display-box">
+                    <img src="image/favourite.jpeg" alt="A picture of a heart" class="landing-page-icon">
+                    <a href="#">My favourites</a>
+                </div>
+
+                <div class="display-box">
+                    <img src="image/account.png" alt="A picture of an account" class="landing-page-icon">
+                    <a href="/admin">Account</a>
+                </div>
+
+            </div>
+
+            <div class="site-name center">
+                <p class="anton-regular white-text font-md">Clever movies</p>
+            </div>
+
+        </section>
+      
+
+    </main>
+    <!-- The mains end here -->
+ 
+</body>
+
+</html>

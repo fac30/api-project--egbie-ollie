@@ -1,0 +1,30 @@
+
+
+<nav class="nav-container dashboard-nav">
+    <div class="nav-head flex-center padding-top-sm padding-bottom-sm">
+        <div class="logo">
+           <a href="/" class="anton-regular">
+            Home
+           </a>
+        </div>
+
+        <div class="header-body flex-center anton-regular text-upper font-md">
+            Clever movies
+        </div>
+
+        <div class="header-footer">
+            <a href="/"> <img src="image/alternate-sign-in.svg" alt="A login image" class="icon"></a>
+           
+            
+            <% if (isAdmin) { %>
+                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %> <span class="font-sm text-capitalize lighter black">(logged in as Admin)</span></a> | 
+            <% } else { %>
+                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %></a> | 
+            <% } %>
+            
+            <a href="/logout" class="font-sm">logout</a>
+               
+           
+        </div>
+    </div>
+</nav>

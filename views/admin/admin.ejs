@@ -1,0 +1,792 @@
+<%- include('../partials/header/header.ejs', {title: "Dashboard " }) %>
+
+    <body>
+
+        <%- include('../partials/header/dashboard.ejs') %>
+
+            <!-- The main section starts here -->
+            <main>
+
+                <section id="admin-section">
+
+                    <div class="container">
+
+                        <div class="dashboard flex-col">
+                            <h1>Dashboard</h1>
+
+                            <!-- Personal Details Section -->
+                            <h2>Personal Details</h2>
+
+                            <div class="personal-details-info flex-col">
+                                <a href="#" class="view-personal-info-link dashboard-bg">Personal Section</a>
+
+                                <div class="personal-details-sub-menu flex-col">
+                                    <hr>
+                                    <a href="#personal-details" class="dashboard-bg">View Personal Details</a>
+                                    <a href="#change-your-email" class="dashboard-bg">Change Your Email</a>
+                                    <a href="#add-details" class="dashboard-bg">Add Personal Details</a>
+                                    <a href="#hashedPassword" class="dashboard-bg">View Hash password</a>
+                                </div>
+
+                            </div>
+
+
+                            <hr>
+                            
+
+                            <% if (isAdmin)  { %>
+                            <!-- Home Section -->
+                                <h2>Homepage</h2>
+                                <a href="#edit-home-page" class="dashboard-bg home-page-link">Homepage Section</a>
+                                <div class="home-page flex-col">
+
+                                    <div class="home-page-sub-menu flex-col">
+                                        <hr>
+                                        <a href="#home-page-section-1" class="dashboard-bg">Edit section 1</a>
+                                        <a href="#home-page-section-2" class="dashboard-bg">Edit section 2</a>
+                                        <a href="#home-page-section-3" class="dashboard-bg">Edit section 3</a>
+                                        <a href="#home-page-section-4" class="dashboard-bg">Edit section 4</a>
+
+                                    </div>
+
+                                </div>
+                                <hr>
+                            <%  } %>
+
+                            <!-- Cache Section -->
+                            <h2>Cache</h2>
+                            <a href="#delete-cache-items" class="dashboard-bg">Visit Cache</a>
+                            <hr>
+
+                            <!-- Jokes Section -->
+                            <h2>Jokes</h2>
+                            <a href="#get-joke" class="dashboard-bg">Request a Joke</a>
+                            <hr>
+
+                            <!-- Filters Section -->
+                            <h2>Filters</h2>
+                            <a href="#filter-queries" class="dashboard-bg">Filter Your Queries</a>
+                            <hr>
+
+                            <!-- Socials Section -->
+                            <h2>Socials</h2>
+                            <a href="#add-socials" class="dashboard-bg">Add Socials</a>
+                            <hr>
+
+                            <!-- API Section -->
+                            <h2>API</h2>
+                            <a href="#APIOverview" class="dashboard-bg">API Overview</a>
+                            <hr>
+
+                            <!-- Account Section -->
+                            <h2>Account</h2>
+                            <a href="#delete-account" class="dashboard-bg">Delete Account</a>
+                        </div>
+
+
+
+                        <div class="user-info">
+
+                            <!-- The spinner element -->
+                            <div class="spinner"></div>
+
+                            <!-- The column for the administration section -->
+                            <div class="info-banner padding-top-sm padding-bottom-sm center white-text">
+                                <p>Administration dashboard</p>
+                            </div>
+
+
+                            <div class="flex-row">
+
+                                <div class="user-movie-and-film-facts flex-evenly  display-info">
+                                    <div class="img">
+                                        <img src="image/admin-pic.jpeg" alt="An admin pic" class="profile-icon">
+                                    </div>
+
+
+                                    <div class="div-group flex-col">
+                                        <span class="label">Username</span>
+                                        <span class="text-capitalize">
+                                            <%= userId %>
+                                        </span>
+                                    </div>
+
+                                    <div class="div-group flex-col">
+                                        <span class="label">Date joined</span>
+                                        <span>
+                                            <%= joined %>
+                                        </span>
+                                    </div>
+
+                                    <div class="user-icons center">
+                                        <div class="icons ">
+                                            <img src="image/envelope.svg" alt="an email icon" class="icon">
+                                            <img src="image/phone.svg" alt="an phone icon" class="icon">
+                                            <img src="image/address-book.svg" alt="an address icon" class="icon">
+                                            <img src="image/person-add.svg" alt="a person icon" class="icon">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="display-info ">
+
+                                <div class="header center label padding-bottom-md">
+                                    stats
+                                </div>
+                                <div class="wrapper flex-evenly">
+
+                                    <div class="user-details flex-col center">
+                                        <span><img src="image/watching.jpg" alt="" class="icon admin-pic"></span>
+                                        <span class="label">Watchlist</span>
+                                        <span class="highlight"><%= watchList %></span>
+                                    </div>
+
+                                    <div class="user-playlist flex-col center">
+                                        <span><img src="image/favourite.jpeg" alt="" class="icon admin-pic"></span>
+                                        <span class="label">Favourites</span>
+                                        <span class="highlight"><%= favourites %></span>
+                                    </div>
+
+                                    <div class="user-playlist flex-evenly center flex-col">
+                                        <span><img src="image/search.svg" alt="" class="icon admin-pic"></span>
+                                        <span class="label">Search Terms</span>
+                                        <span class="highlight"><%= noOfSearchTermsMade %></span>
+                                    </div>
+
+                                    <div class="user-playlist flex-evenly center flex-col">
+                                        <span><img src="image/api.svg" alt="" class="icon admin-pic"></span>
+                                        <span class="label">API calls</span>
+                                        <span class="highlight"><%= NO_OF_API_REQUESTS %></span>
+                                    </div>
+
+                                    <div class="user-playlist flex-evenly center flex-col">
+                                        <span><img src="image/star.svg" alt="" class="icon admin-pic"></span>
+                                        <span class="label">Ratings</span>
+                                        <span class="highlight"><%= ratings %></span>
+                                    </div>
+
+                                    <div class="user-playlist flex-evenly center flex-col">
+                                        <span><img src="image/database.svg" alt="" class="icon admin-pic"></span>
+                                        <span class="label">Cache Capacity</span>
+                                        <span class="highlight"><%= maximumSize  %></span>
+                                    </div>
+
+                                    <div class="user-playlist flex-evenly center flex-col">
+                                        <span><img src="image/preferences-web-browser-cache.svg" alt=""
+                                                class="icon admin-pic"></span>
+                                        <span class="label">Available cache space</span>
+                                        <span class="highlight"><%= remainingSpace %></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- personal details section -->
+                            <div class="personal-details" id="personal-details">
+
+                                <div class="contact-details display-info">
+                                    <p class="center font-sm text-upper padding-bottom-sm label">Personal details</p>
+                                    <div class="flex-group flex-space-between">
+                                        <div class="admin-page-icon">
+                                            <img src="image/envelope.svg" alt="An email icon" class="icon">
+                                            Email
+
+                                        </div>
+                                        <div class="admin-page-icon">
+                                            <p class="user-data">
+                                                <%= email %>
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="flex-group flex-space-between">
+                                        <div class="admin-page-icon">
+                                            <img src="image/phone.svg" alt="An email icon" class="icon">
+                                            Phone
+
+                                        </div>
+
+                                        <div class="admin-page-icon">
+                                            <p class="user-data">07951020258</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="flex-group flex-space-between">
+                                        <div class="admin-page-icon">
+                                            <img src="image/address-book.svg" alt="An email icon" class="icon">
+                                            Address
+
+                                        </div>
+
+                                        <div class="admin-page-icon">
+                                            <address class="user-data">161A Fake address</address>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="flex-group flex-space-between">
+                                        <div class="admin-page-icon">
+                                            <img src="image/address-book.svg" alt="An email icon" class="icon">
+                                            Socials
+
+                                        </div>
+
+                                        <div class="admin-page-icon">
+                                            <a href="#"><img src="image/gitlab.svg" alt="A gitlab icon"
+                                                    class="icon"></a>
+                                            <a href="#"><img src="image/linkedin.svg" alt="A linkedin icon"
+                                                    class="icon"></a>
+                                            <a href="#"><img src="image/instagram.svg" alt="An instagram icon"
+                                                    class="icon"></a>
+                                            <a href="#"><img src="image/whatsapp.svg" alt="A whatsapp icon"
+                                                    class="icon"></a>
+                                            <a href="#"> <img src="image/facebook (1).svg" alt="A Facebook icon"
+                                                    class="icon"></a>
+                                            <a href="#"> <img src="image/youtube.svg" alt="A Youtube icon"
+                                                    class="icon"></a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="title display-info">
+                                    <p class="center font-sm text-upper padding-bottom-sm label">Name</p>
+
+                                    <div class="flex-group flex-space-between">
+                                        <div class="admin-page-icon">
+                                            <img src="image/person-add.svg" alt="An email icon" class="icon">
+                                            First Name
+
+                                        </div>
+
+                                        <div class="admin-page-icon">
+                                            <p class="first-name user-data">Egbie</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="flex-group flex-space-between">
+                                        <div class="admin-page-icon">
+                                            <img src="image/person-add.svg" alt="An email icon" class="icon">
+                                            <span>Surname</span>
+
+                                        </div>
+
+                                        <div class="admin-page-icon">
+                                            <p class="surname user-data">Uku</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- The hashed password section -->
+                            <div class="hashedPassword flex-col display-info" id="hashedPassword">
+                                <h1 class="label padding-bottom-sm">Password</h1>
+
+                                <p>Below is your hashed password. This is a secure representation of your password used
+                                    for authentication:</p>
+
+
+                                <label for="hashedPassword" class="padding-top-sm">Hashed password</label>
+                                <textarea name="hashedPassword" id="" cols="30" rows="10" readonly>
+                                    <%= hashedPassword %>
+                                </textarea>
+
+                            </div>
+
+                            <!-- Request a joke -->
+                            <div class="getJoke flex-row display-info" id="get-joke">
+
+                                <form action="" class="flex-col request-joke-form dashboard-form">
+                                    <h1 class="label">Request a joke</h1>
+                                    <p class="padding-top-sm padding-bottom-md">We know that filling forms can be a
+                                        daunting
+                                        task, so why not request a joke to lighten the mood</p>
+
+                                    <p class="joke padding-top-sm padding-bottom-md">Joke to go here</p>
+
+
+                                    <button type="submit" class="text-upper button-sm label search-bg">Get Joke</button>
+
+                                </form>
+                            </div>
+
+
+                            <!-- change email section -->
+                            <div class="change-email flex-row display-info" id="change-your-email">
+
+                                <form action="" class="flex-col change-email-form dashboard-form">
+                                    <h1 class="label padding-bottom-sm">Change your email</h1>
+                                    <label for="new-email">New Email address</label>
+                                    <input type="email" name="new-email" id="new-email">
+
+                                    <label for="new-email">Confirm New Email address</label>
+                                    <input type="email" name="new-email" id="confirm-new-email">
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color">Save</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <!-- update your details section -->
+                            <div class="add-details flex-row display-info" id="add-details">
+                                <form action="" class="flex-col add-details-form dashboard-form">
+                                    <h1 class="label padding-bottom-sm">Add your personal details</h1>
+
+                                    <label for="first-name">First name</label>
+                                    <input type="text" name="first-email" id="first-name">
+
+                                    <label for="surname">Surname</label>
+                                    <input type="text" name="surname" id="surname">
+
+                                    <label for="surname">Phone number</label>
+                                    <input type="text" name="number" id="number">
+
+                                    <label for="address">Address</label>
+                                    <textarea name="address" id="" cols="30" rows="10"></textarea>
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <% if (isAdmin) { %>
+
+                            <!-- section 1 section -->
+                            <div class="edit-content home-page-section-1 flex-row display-info" id="home-page-section-1">
+                                <form action="" method="post"
+                                    class="flex-col add-details-form dashboard-form section-1-form">
+                                    <h1 class="label padding-bottom-sm text-capitalize">Edit section 1</h1>
+
+                                    <p class="padding-bottom-sm padding-top-sm line-height-min">This is Section 1
+                                        Editing feature
+                                        allows you to customize the content displayed in a section one of your homepage.
+                                        Tailor the title and description to showcase relevant information,
+                                        such as latest updates, featured articles, or popular products.
+                                    </p>
+
+                                    <p><span class="bold">Limitations:</span> Titles are restricted to 40 characters,
+                                        and description is limited to 250 chars.
+                                    </p>
+                                    <label for="home-page-section-1-title">Enter new title (40 chars)</label>
+                                    <input type="text" name="title" id="home-page-section-1-title" maxlength="40"
+                                        required>
+
+
+                                    <label for="home-page-section-1-description">Enter new description (250
+                                        chars)</label>
+                                    <textarea name="description" id="home-page-section-1-description" cols="30"
+                                        rows="10" required minlength="50" maxlength="250" required></textarea>
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color edit-home-page-section-btn">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <!-- section 2 section -->
+                            <div class="edit-content home-page-section-2 flex-row display-info" id="home-page-section-2">
+                                <form action="" method="post" class="flex-col add-details-form dashboard-form section-2-form" id="section-2-form" autocomplete="off">
+                                    <h1 class="label padding-bottom-sm text-capitalize">Edit section 2</h1>
+
+                                    <p class="padding-bottom-sm padding-top-sm line-height-min">This is Section 2
+                                        Editing feature
+                                        allows you to customize the content displayed in a section two of your homepage.
+                                        Tailor the title and description to showcase relevant information,
+                                        such as latest updates, featured articles, or popular products.
+                                    </p>
+
+                                    <p><span class="bold">Limitations:</span> Titles are restricted to 40 characters,
+                                        and description is limited to 250 chars.
+                                    </p>
+                                    <label for="home-page-section-2-title">Enter new title (40 chars)</label>
+                                    <input type="text" name="title" id="home-page-section-2-title" minlength="10" required>
+
+
+                                    <label for="home-page-section-2-description">Enter new description (255 char)</label>
+                                    <textarea name="description" id="home-page-section-2-description" cols="30" rows="10"
+                                           required minlength="50"
+                                           maxlength="250" required></textarea>
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color edit-home-page-section-two-btn">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <!-- section three section -->
+                            <div class="edit-content home-page-section-3 flex-row display-info"
+                                id="home-page-section-3">
+                                <form action="" method="post" class="flex-col add-details-form dashboard-form section-3-form">
+                                    <h1 class="label padding-bottom-sm text-capitalize">Section 3</h1>
+
+                                    <p class="padding-bottom-sm padding-top-sm line-height-min">This is Section 3
+                                        Editing feature
+                                        allows you to customize the content displayed in a section three of your
+                                        homepage.
+                                        Tailor the title and description to showcase relevant information,
+                                        such as latest updates, featured articles, or popular products.
+                                    </p>
+
+                                    <p><span class="bold">Limitations:</span> Titles are restricted to 40 characters,
+                                        and description is limited to 250 chars.
+                                    </p>
+                                    <label for="home-page-section-3-title">Enter new title (40 chars)</label>
+                                    <input type="text" name="title" id="home-page-section-3-title" minlength="10"
+                                        required>
+
+
+                                    <label for="home-page-section-3-description">Enter new description (255
+                                        char)</label>
+                                    <textarea name="description" id="home-page-section-3-description" cols="30" rows="10" required minlength="50"
+                                        maxlength="250"></textarea>
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color edit-home-page-section-three-btn">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- section four section -->
+                            <div class="edit-content home-page-section-4 flex-row display-info"id="home-page-section-4">
+                                <form action="" method="post" class="flex-col add-details-form dashboard-form section-4-form">
+                                    <h1 class="label padding-bottom-sm text-capitalize">Section 4</h1>
+
+                                    <p class="padding-bottom-sm padding-top-sm line-height-min">This is Section 4
+                                        Editing feature
+                                        allows you to customize the content displayed in a section four of your
+                                        homepage.
+                                        Tailor the title and description to showcase relevant information,
+                                        such as latest updates, featured articles, or popular products.
+                                    </p>
+
+                                    <p><span class="bold">Limitations:</span> Titles are restricted to 40 characters,
+                                        and description is limited to 250 chars.
+                                    </p>
+                                    <label for="home-page-section-4-title">Enter new title (40 chars)</label>
+                                    <input type="text" name="title" id="home-page-section-4-title" minlength="10"
+                                        required>
+
+
+                                    <label for="home-page-section-4-descripton">Enter new description (255 char)</label>
+                                    <textarea name="description" id="home-page-section-4-descripton" cols="30" rows="10" required
+                                        minlength="50" maxlength="250"></textarea>
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color edit-home-page-section-four-btn">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <%  } %>
+                            
+                            <!-- Filter your queries section -->
+                            <div class="filter-queries flex-row display-info" id="filter-queries">
+
+                                <form action="" class="flex-col filter-queries-form dashboard-form">
+                                    <h1 class="label padding-bottom-md">Filter your queries</h1>
+
+                                    <label for="search">Search queries</label>
+                                    <input type="text" name="search" id="searh">
+
+                                    <label for="include-adult">Include Adult</label>
+                                    <select name="include-adult" id="include-adult">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+
+                                    <label for="language">Language</label>
+                                    <select name="language" id="language">
+                                        <option value="Country" selected>Country</option>
+                                    </select>
+
+                                    <label for="include-adult">Theatrical Release year</label>
+                                    <select name="release-year" id="release-year">
+                                        <option value="" selected>Primary Release year</option>
+                                    </select>
+
+                                    <label for="return-data">Return data as: e.g webpage or JSON</label>
+                                    <select name="release-year" id="return-format">
+                                        <option value="webpage" selected>Webpage</option>
+                                        <option value="json">Json</option>
+                                    </select>
+
+                                    <label for="page">Pages</label>
+                                    <input type="number" name="page-results" id="page-results" min="1" max="50">
+
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm  admin-search search-bg">Search</button>
+                                        <button type="submit"
+                                            class="text-upper button-sm  admin-save success-bg-color">Save</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <!-- Delete your cache -->
+                            <div class="delete-cache-items flex-col display-info" id="delete-cache-items">
+                                <h1 class="label padding-bottom-sm text-capitalize padding-left">Delete cache items</h1>
+                                <p
+                                    class="padding-bottom-sm padding-top-sm line-height-min padding-left dashboard-section-description">
+                                    To keep your browsing experience smooth and optimized, we provide options for
+                                    managing your
+                                    cached data.
+                                    Here's what each section is about:
+                                </p>
+
+                                <p class="dashboard-section-description">
+                                    <span class="bold">Search Terms:</span> This section allows you to view and delete
+                                    previous search terms you've used on our platform. Removing old search terms can
+                                    help
+                                    streamline your
+                                    search experience and keep your search history tidy.
+                                </p>
+
+                                <p class="dashboard-section-description">
+                                    <span class="bold">Favourites:</span> Here, you can see a free up space by deleting
+                                    your favourites.
+
+                                </p>
+
+                                <p class="dashboard-section-description">
+                                    <span class="bold">Ratings:</span> Here, you can see a free up space by deleting
+                                    your ratings.
+                                    Warning, this will remove all films and series you have rated
+                                </p>
+
+                                <p class="dashboard-section-description">
+                                    <span class="bold">Watchlist:</span> Your watchlist contains items you've added to
+                                    watchlist.
+                                    You can delete the entire watchlist here
+                                </p>
+
+
+                                <form action="" class="flex-col add-details-form dashboard-form">
+
+                                    <form>
+
+                                        <div class="item-to-delete">
+                                            <p>Delete search terms </p>
+
+                                            <p class="choice">
+                                                <label>
+                                                    <input type="radio" name="search-terms" value="yes"> Yes
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="search-terms" value="no" checked> No
+                                                </label>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="item-to-delete">
+                                            <p>Favourites </p>
+
+                                            <p class="choice">
+                                                <label>
+                                                    <input type="radio" name="favourites" value="yes"> Yes
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="favourites" value="no" checked> No
+                                                </label>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="item-to-delete">
+                                            <p>Ratings </p>
+
+                                            <p class="choice">
+                                                <label>
+                                                    <input type="radio" name="ratings" value="yes"> Yes
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="ratings" value="no" checked> No
+                                                </label>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="item-to-delete">
+                                            <p>Watchlist </p>
+
+                                            <p class="choice">
+                                                <label>
+                                                    <input type="radio" name="watchlist" value="yes" checked> Yes
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="watchlist" value="no" checked> No
+                                                </label>
+                                            </p>
+
+                                        </div>
+
+
+
+                                        <div class="button-container">
+                                            <button type="submit"
+                                                class="text-upper button-sm danger-bg-color">Delete</button>
+                                        </div>
+                                    </form>
+
+
+                                </form>
+
+
+
+                            </div>
+
+                            <!-- Add socials -->
+                            <div class="socials flex-col display-info" id="add-socials">
+
+                                <form action="" class="socials social-form flex-col dashboard-form">
+                                    <h1 class="label padding-bottom-sm">Add your socials</h1>
+                                    <label for="github"><span><img src="image/gitlab.svg" alt="A github icon"
+                                                class="icon"></span>Github</label>
+                                    <input type="text" name="github" id="github">
+
+                                    <label for="linkedin"><span><img src="image/linkedin.svg" alt="A linkedin icon"
+                                                class="icon"></span>Linkedin</label>
+                                    <input type="text" name="linkedin" id="linkedin">
+
+                                    <label for="instagram"><span><img src="image/instagram.svg" alt="An instagram icon"
+                                                class="icon"></span>Instagram</label>
+                                    <input type="text" name="instagram" id="instagram">
+
+                                    <label for="whatsapp"><span><img src="image/whatsapp.svg" alt="A whatsapp icon"
+                                                class="icon"></span>Whatsapp</label>
+                                    <input type="text" name="whatsapp" id="whatsapp">
+
+                                    <label for="facebook"><span><img src="image/facebook (1).svg" alt="A facebook icon"
+                                                class="icon"></span>Facebook</label>
+                                    <input type="text" name="facebook" id="facebook">
+
+                                    <label for="youtube"><span><img src="image/youtube.svg" alt="A youtube icon"
+                                                class="icon"></span>Youtube</label>
+                                    <input type="text" name="youtube" id="youtube">
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm success-bg-color">Save</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+
+                            <!-- API Overview -->
+                            <div class="APIOverview flex-col display-info" id="APIOverview">
+                                <h1 class="label padding-bottom-sm">API keys</h1>
+
+
+                                <label>Movie API Key</label>
+                                <input type="text" name="API key" id="APIKey" readonly class="APIKey">
+
+                                <label for="API-read-access-token">Movie API read token</label>
+                                <textarea name="API-read-access-token" id="" cols="30" rows="10" value="ssss" readonly
+                                    class="API-read-access-token"></textarea>
+
+
+                                <div class="button-container">
+                                    <button class="hide-api-keys button-sm text-upper success-bg-color">Hide API
+                                        key</button>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Delete your account -->
+                            <div class="delete-account flex-col display-info" id="delete-account">
+
+                                <form action="post" class="delete-account-form dashboard-form  flex-col">
+                                    <h1 class="label padding-bottom-sm">Delete your account</h1>
+
+                                    <p class="padding-top-sm padding-bottom-md warning-text">You've just entered the
+                                        danger
+                                        zone! If you would like to continue and remove your account,
+                                        you can do so by entering your password below and confirming the prompts.
+                                    </p>
+
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" id="passwprd">
+
+                                    <div class="button-container">
+                                        <button type="submit"
+                                            class="text-upper button-sm danger-bg-color">Continue</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="side-panel">
+                            <img src="static/image/1.png" alt="">
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+            </main>
+
+            <div class="error-msg danger-bg-color center">
+                <p>Something went wrong !!</p>
+            </div>
+            <div class="success-msg success-bg-color center">
+                <p>Your data has been successfully saved</p>
+
+            </div>
+
+            <!-- This is the modal for the deletion of the account -->
+            <div class="warning-prompt-msg  account-deletion">
+                <div class="container flex-col center">
+                    <h1 class="padding-bottom-sm text-capitalize">Deletion of account</h1>
+                    <p> Are you sure you want to delete this account?</p>
+                    <p>This action is irreversable</p>
+
+                    <div class="buttons padding-top-lg">
+                        <a href="#" class="danger-bg-color cancel-btn">cancel</a>
+                        <a href="" class="success-bg-color confirm-btn">confirm</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This is the modal for the deletion of the cache -->
+            <div class="warning-prompt-msg  cache-deletion">
+                <div class="container flex-col center">
+                    <h1 class="padding-bottom-sm text-capitalize">Deletion of cache</h1>
+                    <p> Are you sure you want to clear the delete the Cache?</p>
+                    <p>This action is irreversable</p>
+
+                    <div class="buttons padding-top-lg">
+                        <a href="#" class="danger-bg-color cancel-btn">cancel</a>
+                        <a href="" class="success-bg-color confirm-btn">confirm</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <script src="js/dashboard.js"></script>
+
+    </body>
+
+    </html>

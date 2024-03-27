@@ -1,0 +1,54 @@
+<nav class="nav-container">
+    <div class="nav-head flex-center padding-top-xsm padding-bottom-sm">
+        <div class="logo">
+            <!-- <img src="image/logo-color.png" alt="The logo for the site"  class="site-logo"> -->
+        </div>
+
+        <div class="header-body anton-regular text-upper font-md">
+
+            <span class="anton-regular font-lg">Clever Movies</span>
+        </div>
+
+        <div class="header-footer">
+            <% if (userId) { %>
+                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %> 
+
+                    <% if (isAdmin) { %>
+                    <span class="font-sm poppins-light"> (You are logged in as admin)</span></a> 
+                    <% } %>
+                    
+                    |
+
+                    <a href="/" class="font-md">logout</a>
+            <% } %>
+            
+          
+            
+            <% if (!isAdmin) { %>
+                <div class="login">
+                    <img src="image/alternate-sign-in.svg" alt="A login image" class="icon">
+                    <a href="/login">Login</a>
+                </div>
+                <div class="register">
+                    <img src="image/alternate-sign-in.svg" alt="A login image" class="icon">
+                    <a href="/register">Register</a>
+                </div>
+            <% } %>
+            
+        </div>
+
+    </div>
+
+    <div class="nav-body flex-center padding-top-sm padding-bottom-sm berkshire-swash-regular font-md">
+        <a href="#" class="nav-link">Films</a>
+        <a href="#" class="nav-link">TV show</a>
+
+        <% if (userId) { %>
+            <a href="/landing-page" class="nav-link">Home</a>
+            <a href="/admin" class="nav-link">Dashboard</a>
+            <% } %>
+
+
+    </div>
+
+</nav>

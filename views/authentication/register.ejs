@@ -1,0 +1,139 @@
+<%- include('../partials/header/header.ejs', {title: "Login page" }) %>
+
+    <body>
+
+        <!-- The navbar section starts here -->
+
+        <!-- The main section starts here -->
+        <main>
+            <section id="register">
+                <div class="info-banner padding-top-sm padding-bottom-sm center white-text" role="region">
+                    <p>Register with this site and you will be able to track, save, and add favorites to your movies or
+                        TV series.</p>
+                    <p>Already have an account? Click below.</p>
+                    <a href="/login" class="text-capitalize white-text">Back to login</a>
+                </div>
+
+                <div class="container margin-bottom flex-row">
+
+
+                    <div class="site-form" role="heading">
+                        <div class="header-banner center padding-bottom-sm padding-top-sm anton-regular white-text font-md"
+                            role="heading" aria-level="1">Register form</div>
+
+                        <div class="login-img center">
+                            <img src="image/login-img.jpg" alt="login image" class="login-pic">
+                        </div>
+
+                        <div class="error-warning-userform-title center warning-text hidden" role="alert">
+                            <p>The form couldn't be submitted because it contained errors</p>
+                        </div>
+
+                        <div class="warning-text registration-errors" id="registration-errors" role="alert">
+                            <!-- Content dynamically added/removed for errors -->
+                        </div>
+
+
+                        <form action="/register" method="post" class="register-form" id="register-form" role="form">
+
+                            <div class="form-group flex-col">
+                                <label for="username">Username</label>
+                                <p class="warning-text username-exists" role="alert" aria-live="assertive"
+                                    aria-relevant="all" aria-atomic="true">Username already exists</p>
+                                <input type="text" name="username" id="username" class="username-field" required
+                                    aria-describedby="username-error">
+                                <div id="username-error" class="hidden">Please choose a different username</div>
+                            </div>
+
+                            <div class="form-group flex-col">
+                                <label for="email">Email</label>
+                                <p class="warning-text email-exists" role="alert" aria-live="assertive"
+                                    aria-relevant="all" aria-atomic="true">Email already exists</p>
+                                <input type="email" name="email" id="email" class="email-field" required
+                                    aria-describedby="email-error">
+                                <div id="email-error" class="hidden">Please use a different email address</div>
+                            </div>
+
+
+                            <div class="form-group flex-col">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="password-field" required
+                                    aria-describedby="password-error">
+                                <div id="password-error" class="hidden">Please enter a valid password</div>
+                            </div>
+
+                            <div class="form-group flex-col">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" name="confirm-password" id="confirm-password"
+                                    class="confirm-password-field" required aria-describedby="confirm-password-error">
+                                <div id="confirm-password-error" class="hidden">Passwords do not match</div>
+                            </div>
+
+
+                            <div class="form-group flex-col">
+                                <div class="flex-row">
+                                    <input type="checkbox" name="show-password" id="show-password-toggle"
+                                        aria-label="Show password">
+                                    <label for="show-password-toggle" class="show-password-toggle font-sm"> Show
+                                        password</label>
+                                </div>
+                                <div class="flex-row">
+                                    <button type="submit" class="register-btn button-md">Register</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                    <!-- Verifies the strength of the password -->
+                    <div class="password-strength hidden" role="status" aria-live="polite">
+                        <div class="container">
+                            <div
+                                class="header-banner center padding-bottom-sm padding-top-sm anton-regular white-text font-md password-strength-header">
+                                Password Strength board</div>
+                            <div class="contains-lower-case opacity">
+                                <img src="image/white-heavy-check-mark (1).svg" alt="" srcset="" class="check-icon">
+                                <span>Must contain at least one lowercase</span>
+                            </div>
+                            <div class="contains-capital opacity">
+                                <img src="image/white-heavy-check-mark (1).svg" alt="" srcset="" class="check-icon">
+                                <span>Must contain at least one capital</span>
+                            </div>
+                            <div class="contains-number opacity">
+                                <img src="image/white-heavy-check-mark (1).svg" alt="" srcset="" class="check-icon">
+                                <span>Must contain at least one number</span>
+                            </div>
+                            <div class="contains-special-char opacity">
+                                <img src="image/white-heavy-check-mark (1).svg" alt="" srcset="" class="check-icon">
+                                <span>Must contain at least one special</span>
+                            </div>
+                            <div class="is-length-vaiid opacity">
+                                <img src="image/white-heavy-check-mark (1).svg" alt="" srcset="" class="check-icon">
+                                <span>Must contain at least eight characters</span>
+                            </div>
+                            <div class="do-password-match opacity">
+                                <img src="image/white-heavy-check-mark (1).svg" alt="" srcset="" class="check-icon">
+                                <span>Passwords match</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+        </main>
+
+        <div class="spinner"></div>
+
+        <!-- The footer starts here -->
+        <script src="js/register.js" type="module"></script>
+
+        <%- include('../partials/footer/footer.ejs') %>
+
+
+    </body>
+
+    </html>

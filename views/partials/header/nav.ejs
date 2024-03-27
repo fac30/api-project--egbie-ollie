@@ -1,0 +1,41 @@
+<nav class="nav-container page-nav">
+<div class="nav-head flex-center padding-top-xsm padding-bottom-sm">
+    <div class="header-body anton-regular text-upper font-md">
+        
+        <span class="anton-regular">Clever Movies</span>
+    </div>
+
+    <div class="header-footer">
+        <% if (userId) { %>
+            <a href="/"> <img src="image/alternate-sign-in.svg" alt="A login image" class="icon"></a>
+
+            <% if (isAdmin) %>
+                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %>(Admin)</a> | 
+             <% { %> 
+                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %></a> | 
+              <% } %>
+
+             <a href="#" class="font-md">logout</a>
+            
+           
+        <% } else { %>
+            <div class="login">
+                <img src="image/alternate-sign-in.svg" alt="A login image" class="icon">
+                <a href="/login">Login</a>
+            </div>
+            <div class="register">
+                <img src="image/alternate-sign-in.svg" alt="A login image" class="icon">
+                <a href="/register">Register</a>
+            </div>
+        <% } %>
+      
+    </div>
+</div>
+
+<div class="nav-body flex-center padding-top-sm padding-bottom-sm berkshire-swash-regular font-md">
+    <a href="#" class="nav-link">Films</a>
+    <a href="#" class="nav-link">TV show</a>
+
+</div>
+
+</nav>

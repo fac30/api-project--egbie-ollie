@@ -1,0 +1,135 @@
+
+<%- include('../partials/header/relativeHeader.ejs', {title: "Detauks " }) %>
+
+
+
+<body>
+
+    <%- include('../partials/header/nav.ejs') %>
+
+    <section id="movies-details">
+        <div class="container">
+            <div class="backdrop">
+                <div class="backdrop-img-overlay"></div>
+                <img src="<%= url + '/' + movieData.backdrop_path %>" alt="movie" class="backdrop-img">
+            </div>
+    
+            <div class="movie-info">
+                <div class="image-poster">
+                    <img src="<%= url + '/' + movieData.poster_path %>" alt="movie" class="movie-poster">
+                </div>
+    
+                <div class="movie-detail">
+                    <h1><%= movieData.original_title %></h1>
+                    <div class="vote-average center">
+                        <span class="voting">40</span>
+                    </div>
+                    <p class="font-md padding-top-sm">Overview</p>
+                    <p class="padding-top-md">
+                        <%= movieData.overview %>
+                    </p>
+    
+                    <div class="release-date flex-col padding-top-sm">
+                        <span class="font-md"><%= movieData.release_date %></span>
+                        <span><%= movieData.popularity %></span>
+                    </div>
+                    <div class="release-date flex-col padding-top-sm">
+                        <span class="font-md">Original language</span>
+                        <span><%= movieData.original_language %></span>
+                    </div>
+    
+                    <div class="release-date flex-col padding-top-sm">
+                        <span class="font-md">Release Date</span>
+                        <span>2001-11-16</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+  
+    
+    
+
+    
+    
+    <!-- The main section starts here -->
+    <main>
+
+        <section id="movie-content">
+
+            <div class="container">
+
+               
+             
+
+            
+               
+                
+
+        
+              
+               
+
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+    <!-- The mains end here -->
+
+    <footer class="margin-top-xlg">
+
+        <div class="container padding-top-lg padding-bottom-lg">
+
+            <div class="flex-space-between">
+
+                <div class="subscription flex-col">
+                    <h1 class="anton-regular white-text berkshire-swash-regular">Some clever name here</h1>
+                    <p class="subtitle white-text padding-top-md">Sign up to our newsletter for special bribes, incentives and Everyman listings each week.</p>
+                     <button type="button" class="text-upper button-sm margin-top-sm">Join for free</button>
+                </div>
+
+                <div class="links flex-col">
+                    <a href="#">Movies Films and Downloads</a>
+                    <a href="#">Careers</a>
+                    <a href="#">About some site name here</a>
+                    <a href="#">FAQs</a>
+                    <a href="#">Contact us</a>
+                    <a href="#">Privacy settings</a>
+                </div>
+
+
+                <div class="socials">
+
+                    <div class="social-icons padding-top-sm">
+                       <img src="image/instagram.svg" alt="" srcset="" class="icon">
+                       <img src="image/facebook (1).svg" alt="" class="icon">
+                       <img src="image/whatsapp.svg" alt="" class="icon">
+                       <img src="image/twitter-original (1).svg" alt="" class="icon">
+
+                    </div>
+                </div>
+
+            </div>
+        
+
+        </div>
+        <div class="policies padding-top-xsm padding-bottom-xsm">
+            <div class="policies__wrapper">
+                <a href="#">© Privacy Policy</a>
+                <a href="#">© Terms and Conditions</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+               
+        </div>
+
+
+    </footer>
+
+</body>
+</html>

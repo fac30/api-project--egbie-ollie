@@ -1,0 +1,470 @@
+<%- include('partials/header/header.ejs', {title: "Home page" }) %>
+
+    <body>
+        <div class="banner">
+            <img src="image/moving-banner.gif" alt="A moving banner image">
+        </div>
+
+        <!-- The navbar section starts here -->
+        <%- include('partials/header/nav-index.ejs') %>
+
+
+
+            <!-- The main section starts here -->
+            <main>
+                <section id="movie-content">
+
+                    <div class="container">
+                        <div class="search">
+                            <form action="/movies" method="post" required>
+                                <input type="search" name="search" id="search" class="search__bar margin-top-sm">
+                                <button type="submit" class="search-btn">Search</button>
+                            </form>
+                        </div>
+
+                        <!-- The first section that will be dynamically updated -->
+                        <div class="box">
+                            <% let foundSectionOne = false; %>
+                            <% sectionArray.forEach((section) => { %>
+                                <% if ("sectionone" in section) { %>
+                                    <% foundSectionOne = true; %>
+                                    <h1 class="left padding-top-lg">
+                                        <%= section.sectionone[0].title %>
+                                    </h1>
+                                    <p class="left section-movie-description">
+                                        <%= section.sectionone[0].description %>
+                                    </p>
+                                <% } %>
+                            <% }) %>
+                            
+                            <% if (!foundSectionOne) { %>
+                                <h1 class="left padding-top-md">Section 1</h1>
+                                <p class="left section-movie-description">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Sed suscipit pariatur quos esse ducimus libero, natus officiis a necessitatibus
+                                    ea officia odio, illo, ipsam iusto laudantium ab voluptatum quis laborum?
+                                </p>
+                            <% } %>
+                                                           
+                        </div>
+
+
+                        <div class="section-1">
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm text-capitalize">Movie title</p>
+                                    <p class="font-sm font-lighter">Oct 11 2023</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of section one -->
+
+
+                        <div class="joke-of-day">
+                            <img src="image/Navy Minimalist Movie Night Instagram Post.png" alt="movie image"
+                                class="joke-image">
+                        </div>
+
+
+                        <!-- Section 2 that will be dynamically updated -->
+                        <div class="box">
+
+                            <% let foundSectionTwo = false; %>
+                            <% sectionArray.forEach((section) => { %>
+                                <% if ("sectiontwo" in section) { %>
+                                    <% foundSectionTwo = true; %>
+                                    <h1 class="left padding-top-lg">
+                                        <%= section.sectiontwo[0].title %>
+                                    </h1>
+                                    <p class="left section-movie-description">
+                                        <%= section.sectiontwo[0].description %>
+                                    </p>
+                                <% } %>
+                            <% }) %>
+                            
+                            <% if (!foundSectionTwo) { %>
+                                <h1 class="left padding-top-md">Section 2</h1>
+                                <p class="left section-movie-description">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Sed suscipit pariatur quos esse ducimus libero, natus officiis a necessitatibus
+                                    ea officia odio, illo, ipsam iusto laudantium ab voluptatum quis laborum?
+                                </p>
+                            <% } %>
+                                           
+
+                        </div>
+
+                        <div class="section-2">
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-2-card">
+                                <div class="header">
+                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- End of section 2 -->
+
+                       
+
+                        <!-- Section three that will be dynamically updated -->
+                        <div class="box">
+                            <% let foundSectionThree = false; %>
+                            <% sectionArray.forEach((section) => { %>
+                                <% if ("sectionthree" in section) { %>
+                                    <% foundSectionThree = true; %>
+                                    <h1 class="left padding-top-lg">
+                                        <%= section.sectionthree[0].title %>
+                                    </h1>
+                                    <p class="left section-movie-description">
+                                        <%= section.sectionthree[0].description %>
+                                    </p>
+                                <% } %>
+                            <% }) %>
+                            
+                            <% if (!foundSectionThree) { %>
+                                <h1 class="left padding-top-md">Section 3</h1>
+                                <p class="left section-movie-description">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Sed suscipit pariatur quos esse ducimus libero, natus officiis a necessitatibus
+                                    ea officia odio, illo, ipsam iusto laudantium ab voluptatum quis laborum?
+                                </p>
+                            <% } %>
+                                           
+
+                        </div>
+
+                        <div class="section-3">
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- End of section three -->
+
+                    </div>
+                    <!-- End of section 4 -->
+
+                    </div>
+
+
+                </section>
+            </main>
+
+
+
+            <!-- The footer starts here -->
+            <%- include('./partials/footer/footer.ejs') %>
+
+    </body>
+
+    </html>
