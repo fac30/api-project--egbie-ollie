@@ -43,9 +43,9 @@ app.set('view engine', 'ejs');
 
 
 import rateLimit from 'express-rate-limit';
-import { cache } from "ejs";
 
-// Create a rate limiter middleware
+
+// // Create a rate limiter middleware
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,      // 15 minutes
   max: 100,                      // limit each IP to 100 requests per windowMs
@@ -53,7 +53,7 @@ const limiter = rateLimit({
 });
 
 // Apply the rate limiter to all requests
-app.use(limiter);
+// app.use(limiter);
 
 // Session Middleware
 app.use(session({
@@ -325,7 +325,7 @@ app.get("/login", isAuthenticated, async(req, res) => {
 })
 
 
-app.get("/logout", isAuthenticated, async (req, res) => {
+app.get("/logout", authenticateUser, async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error("Error destroying session:", err);
@@ -449,6 +449,7 @@ app.post("/register", async(req, res) => {
     memoryDB.setItemToSave(CacheSaveTypes.authentication, [userObj]); // Table to save to
     memoryDB.save();
 
+    console.log(memoryDB);
     return res.redirect("/login");
 
 
@@ -541,6 +542,8 @@ app.post("/handle-form-submission", (req, res) => {
 
   const userFormObj = {};
   let cacheObj = memoryDB.getCacheByName(userForm.username);
+
+  // console.log(memoryDB.getByEmail(userForm.email))
  
   switch (true) {
 
