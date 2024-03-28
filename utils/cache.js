@@ -88,20 +88,23 @@ class MemoryDB {
     }
 
     getByEmail(email) {
-        const cache = this._memCache.cache;
-        for (const user in cache) {
-            const member = this.getCacheByName(user);
-            if (member.cacheName !== "default") {
-                if (member.authentication && member.authentication[0].length > 0) {
-                    const OAuth = member.authentication[0].authentication[0];
-                    
-                    console.log(OAuth)
-                    return OAuth.email.toLowerCase() === email.toLowerCase();
+        
+        for (const key in this._memCache.cache) {
+            if (Object.hasOwnProperty.call(this._memCache.cache, key)) {
+                const userData = this._memCache.cache[key];
+                if (userData && userData.authentication) {
+                    for (const authData of userData.authentication) {
+                        if (email.toLowerCase() === authData.email.toLowerCase()) {
+                            return authData;
+                        }
+                    }
                 }
             }
         }
         return null;
     }
+    
+    
     
     /**
     * Sets the save type for the item to be saved. This ensures that when the item
@@ -400,7 +403,7 @@ class MemoryDB {
         // before adding new entries. Currently, it returns false, but this check occurs at the cache level.
         // Consequently, if the database reaches full capacity, the cache ceases to accept new data.
 
-        // This '_deleteOldestEntriesFromTable' already does it but it is not wired to this method
+        // This '_deleteOldestEntriesFromTable' already does it but it is not wired to this functio
         
         // Return false if there is enough space available, indicating that the storage is not at capacity
         return false;

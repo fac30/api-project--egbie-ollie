@@ -33,7 +33,6 @@
                             <!-- Content dynamically added/removed for errors -->
                         </div>
 
-
                         <form action="/register" method="post" class="register-form" id="register-form" role="form">
 
                             <div class="form-group flex-col">
@@ -44,7 +43,7 @@
                                     aria-describedby="username-error">
                                 <div id="username-error" class="hidden">Please choose a different username</div>
                             </div>
-
+                        
                             <div class="form-group flex-col">
                                 <label for="email">Email</label>
                                 <p class="warning-text email-exists" role="alert" aria-live="assertive"
@@ -53,23 +52,21 @@
                                     aria-describedby="email-error">
                                 <div id="email-error" class="hidden">Please use a different email address</div>
                             </div>
-
-
+                        
                             <div class="form-group flex-col">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" class="password-field" required
                                     aria-describedby="password-error">
                                 <div id="password-error" class="hidden">Please enter a valid password</div>
                             </div>
-
+                        
                             <div class="form-group flex-col">
                                 <label for="confirm-password">Confirm Password</label>
                                 <input type="password" name="confirm-password" id="confirm-password"
                                     class="confirm-password-field" required aria-describedby="confirm-password-error">
                                 <div id="confirm-password-error" class="hidden">Passwords do not match</div>
                             </div>
-
-
+                        
                             <div class="form-group flex-col">
                                 <div class="flex-row">
                                     <input type="checkbox" name="show-password" id="show-password-toggle"
@@ -81,9 +78,9 @@
                                     <button type="submit" class="register-btn button-md">Register</button>
                                 </div>
                             </div>
-
+                        
                         </form>
-
+                        
 
                     </div>
 

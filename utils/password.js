@@ -35,7 +35,11 @@ class PasswordStrengthChecker {
      * @returns {boolean} True if the password meets the minimum length requirement, otherwise false.
      */
     containsAtLeastLengthChars(password, length = this.defaultNum) {
-        return password.length >= length;
+
+        if(!password) {
+            return false;
+        }
+        return password && password.length >= length;
     }
 
     /**
@@ -85,6 +89,7 @@ class PasswordStrengthChecker {
             passwordObj.HAS_AT_LEAST_ONE_LOWERCASE &&
             passwordObj.HAS_AT_LEAST_ONE_UPPERCASE;
 
+        console.log(passwordObj);
         return passwordObj;
     }
 

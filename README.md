@@ -2,5 +2,3 @@
 
 ## In progress
 
-
-### Our site 
