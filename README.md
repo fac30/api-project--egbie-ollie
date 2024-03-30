@@ -48,7 +48,7 @@ Next we need to generate a session key?
 
 
 
-Next run the html file called **secretKeyGenerator.html** either by live search or by opening it up in the browser. It should look like this:
+Next run the html file called **secretKeyGenerator.html** either by live search or by opening it up in the browser. It should look like this after you entering a name or a string and then requesting a secret key:
 
 
 ### Generator session key page
