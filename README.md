@@ -1,6 +1,6 @@
 
 
-### MovieHub: Your Ultimate Movie and TV Series Companion
+### Clever Movies: Your Ultimate Movie and TV Series Companion
 CleverMovies is a dynamic web application that fetches movie and TV series data from an external API and provides a personalized experience for users. With CleverMovies, you can browse through a vast collection of titles, search for specific movies or TV series, and even track your favorites.
 
 ### Features
