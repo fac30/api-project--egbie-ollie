@@ -95,7 +95,7 @@ MOVIE_IMAGE_BASE_URL   = https://image.tmdb.org/t/p/original
 
 ### TV shows
 
-![TV shows page](https://drive.google.com/uc?id=1VYqbaa9ofojJXG4HMuwAwwxoqbHY2pt1)
+![TV shows page](https://drive.google.com/uc?id=1Mrg72dHrsGZPHGG_10nVE_3aCYD4rN8C)
 
 
 
