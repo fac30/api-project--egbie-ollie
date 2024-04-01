@@ -89,7 +89,6 @@ class PasswordStrengthChecker {
             passwordObj.HAS_AT_LEAST_ONE_LOWERCASE &&
             passwordObj.HAS_AT_LEAST_ONE_UPPERCASE;
 
-        console.log(passwordObj);
         return passwordObj;
     }
 
@@ -133,7 +132,11 @@ class PasswordImplementer {
         this.password            = plainPassword;
         this.saltRoundsToEncrypt = saltRoundsToEncrypt;
     }
-
+    
+    setPassword(password) {
+        this.password = password;
+    }
+    
     /**
      * Hashes the plain text password using bcrypt.
      * @returns {Promise<string>} A promise that resolves with the hashed password.

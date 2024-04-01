@@ -15,12 +15,7 @@
                 <section id="movie-content">
 
                     <div class="container">
-                        <div class="search">
-                            <form action="/movies" method="post" required>
-                                <input type="search" name="search" id="search" class="search__bar margin-top-sm">
-                                <button type="submit" class="search-btn">Search</button>
-                            </form>
-                        </div>
+                        <%- include('./partials/forms/search-form.ejs') %>
 
                         <!-- The first section that will be dynamically updated -->
                         <div class="box">
@@ -38,11 +33,11 @@
                             <% }) %>
                             
                             <% if (!foundSectionOne) { %>
-                                <h1 class="left padding-top-md">Section 1</h1>
+                                <h1 class="left padding-top-md">Action movies</h1>
                                 <p class="left section-movie-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Sed suscipit pariatur quos esse ducimus libero, natus officiis a necessitatibus
-                                    ea officia odio, illo, ipsam iusto laudantium ab voluptatum quis laborum?
+                                    Experience adrenaline-pumping thrills with our action-packed movie collection! 
+                                    From high-octane car chases to heart-stopping stunts, immerse yourself in a world of
+                                     excitement and adventure. Get ready for non-stop action that will keep you on the edge of your seat
                                 </p>
                             <% } %>
                                                            
@@ -53,7 +48,9 @@
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <a href="/detail/1">
+                                        <img src="image/cool-hand-luke.jpeg" alt="movie" class="movie-img">
+                                    </a>
 
                                 </div>
                                 <div class="body">
@@ -61,14 +58,14 @@
                                     <p class="font-sm font-lighter">Oct 11 2023</p>
                                 </div>
                                 <div class="vote-average center">
-                                    <span class="voting">10</span>
+                                    <span class="voting">7.6</span>
                                 </div>
 
                             </div>
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/electra.jpeg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -97,7 +94,9 @@
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <a href="/detail/1">
+                                        <img src="image/theFlash.jpeg" alt="movie" class="movie-img">
+                                    </a>
 
                                 </div>
                                 <div class="body">
@@ -111,7 +110,25 @@
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <a href="/detail/2">
+                                        <img src="image/batman-latest.jpeg" alt="movie" class="movie-img">
+                                    </a>
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">9</span>
+                                </div>
+                            </div>
+
+                            <div class="section-1-card">
+                                <div class="header">
+                                    <a href="/detail/3">
+                                        <img src="image/batman.jpeg" alt="movie" class="movie-img">
+                                    </a>
 
                                 </div>
                                 <div class="body">
@@ -125,7 +142,9 @@
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <a href="/detail/4">
+                                        <img src="image/black-widow.jpeg" alt="movie" class="movie-img">
+                                    </a>
 
                                 </div>
                                 <div class="body">
@@ -133,13 +152,15 @@
                                     <p class="">Release year</p>
                                 </div>
                                 <div class="vote-average center">
-                                    <span class="voting">10</span>
+                                    <span class="voting">8.9</span>
                                 </div>
                             </div>
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <a href="/detail/5">
+                                        <img src="image/spiderman2.jpeg" alt="movie" class="movie-img">
+                                    </a>
 
                                 </div>
                                 <div class="body">
@@ -147,13 +168,13 @@
                                     <p class="">Release year</p>
                                 </div>
                                 <div class="vote-average center">
-                                    <span class="voting">10</span>
+                                    <span class="voting">7.9</span>
                                 </div>
                             </div>
 
                             <div class="section-1-card">
                                 <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/harry-potter-backy.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -161,21 +182,7 @@
                                     <p class="">Release year</p>
                                 </div>
                                 <div class="vote-average center">
-                                    <span class="voting">10</span>
-                                </div>
-                            </div>
-
-                            <div class="section-1-card">
-                                <div class="header">
-                                    <img src="image/brazil.jpeg" alt="movie" class="movie-img">
-
-                                </div>
-                                <div class="body">
-                                    <p class="font-sm">Movie title</p>
-                                    <p class="">Release year</p>
-                                </div>
-                                <div class="vote-average center">
-                                    <span class="voting">10</span>
+                                    <span class="voting">8.9</span>
                                 </div>
                             </div>
                         </div>
@@ -205,11 +212,12 @@
                             <% }) %>
                             
                             <% if (!foundSectionTwo) { %>
-                                <h1 class="left padding-top-md">Section 2</h1>
+                                <h1 class="left padding-top-md">Blockbusters</h1>
                                 <p class="left section-movie-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Sed suscipit pariatur quos esse ducimus libero, natus officiis a necessitatibus
-                                    ea officia odio, illo, ipsam iusto laudantium ab voluptatum quis laborum?
+                                    Dive into our blockbuster movie lineup and experience the epitome of cinematic excellence. 
+                                    From gripping storytelling to breathtaking visuals, get ready for an unforgettable journey 
+                                    into the world of blockbuster entertainment. Prepare to be dazzled and captivated by the
+                                     biggest hits in film history!?
                                 </p>
                             <% } %>
                                            
@@ -220,7 +228,7 @@
 
                             <div class="section-2-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/la-femme-nikita.jpeg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -228,7 +236,7 @@
                                     <p class="">Release year</p>
                                 </div>
                                 <div class="vote-average center">
-                                    <span class="voting">10</span>
+                                    <span class="voting">8</span>
                                 </div>
                             </div>
 
@@ -262,7 +270,7 @@
 
                             <div class="section-2-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/stranger-things.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -276,7 +284,7 @@
 
                             <div class="section-2-card">
                                 <div class="header">
-                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+                                    <img src="image/no-way-back.jpeg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -290,7 +298,7 @@
 
                             <div class="section-2-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/supergirl.jpeg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -304,7 +312,7 @@
 
                             <div class="section-2-card">
                                 <div class="header">
-                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+                                    <img src="image/spiderman.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -338,22 +346,23 @@
                             <% }) %>
                             
                             <% if (!foundSectionThree) { %>
-                                <h1 class="left padding-top-md">Section 3</h1>
+                                <h1 class="left padding-top-md">Action adventure</h1>
                                 <p class="left section-movie-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Sed suscipit pariatur quos esse ducimus libero, natus officiis a necessitatibus
-                                    ea officia odio, illo, ipsam iusto laudantium ab voluptatum quis laborum?
+                                    Embark on an epic journey filled with excitement and danger with our action-adventure movie collection.
+                                     Join fearless heroes as they brave perilous challenges, face formidable foes, 
+                                     and unravel mysteries in exotic locales. Get ready for pulse-pounding thrills and unforgettable escapades
+                                      that will leave you on the edge of your seat!
                                 </p>
                             <% } %>
                                            
 
                         </div>
 
-                        <div class="section-3">
+                        <div class="section-3 padding-bottom-lg">
 
                             <div class="section-3-card">
                                 <div class="header">
-                                    <img src="image/terminator2.jpg" alt="movie" class="movie-img">
+                                    <img src="image/x-men.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -367,7 +376,7 @@
 
                             <div class="section-3-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/x-men2.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -380,21 +389,7 @@
                             </div>
                             <div class="section-3-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
-
-                                </div>
-                                <div class="body">
-                                    <p class="font-sm">Movie title</p>
-                                    <p class="">Release year</p>
-                                </div>
-                                <div class="vote-average center">
-                                    <span class="voting">10</span>
-                                </div>
-                            </div>
-
-                            <div class="section-3-card">
-                                <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/x-men3.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -408,7 +403,7 @@
 
                             <div class="section-3-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/iron-man2.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -422,7 +417,7 @@
 
                             <div class="section-3-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/iron-man3.jpg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -436,7 +431,7 @@
 
                             <div class="section-3-card">
                                 <div class="header">
-                                    <img src="image/terminator.jpeg" alt="movie" class="movie-img">
+                                    <img src="image/batman3.jpeg" alt="movie" class="movie-img">
 
                                 </div>
                                 <div class="body">
@@ -447,6 +442,22 @@
                                     <span class="voting">10</span>
                                 </div>
                             </div>
+
+                            <div class="section-3-card">
+                                <div class="header">
+                                    <img src="image/indiana-jones.jpg" alt="movie" class="movie-img">
+
+                                </div>
+                                <div class="body">
+                                    <p class="font-sm">Movie title</p>
+                                    <p class="">Release year</p>
+                                </div>
+                                <div class="vote-average center">
+                                    <span class="voting">10</span>
+                                </div>
+                            </div>
+
+                          
                         </div>
 
                         <!-- End of section three -->
