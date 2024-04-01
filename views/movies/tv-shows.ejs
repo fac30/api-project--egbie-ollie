@@ -11,28 +11,30 @@
 
             <div class="container blur-border">
 
-               <%- include('../partials/forms/search-form.ejs') %>
+             
+                <h1 class="padding-bottom-sm padding-top-sm center">TV shows</h1>
 
-                <h1 class="padding-bottom-sm padding-top-sm center">Movies</h1>
-
-                <% if (searchQuery) {%> 
-                    <p class="center text-capitalize">Search term: <%= searchQuery %>
-                    <p class="center">Page <%= movies.page %> out of <%= movies.total_pages %></p>
-                    <p class="center">Total Results : <%= movies.total_results %></p>
+                <% if (!tvShows) {%> 
+                    <p class="center">No TV shows to display at the moment</p>
                 <% } else { %>
-                    <p class="center">No results found by that query</p>
-                <%} %>
+                    <p class="movie-subtitle">
+                        Dive into the world of TV shows with our captivating selection of action-packed series.
+                     From gripping dramas to thrilling adventures, immerse yourself in a whirlwind of suspense,
+                      intrigue, and adrenaline-fueled excitement. Get ready to binge-watch your favorite shows
+                       and embark on unforgettable journeys with our collection of must-see TV entertainment
+                    </p>
+                    <% } %>
                 
-                </p>
+               
 
                 <div class="movies padding-top-lg">
 
-                    <% if (movies && movies.results && movies.results.length > 0) { %>
-                        <% movies.results.forEach(function(movie) { %>
+                    <% if (tvShows) { %>
+                        <% tvShows.results.forEach(function(tvShow) { %>
                             <div class="movie-card poppins-thin">
                                 <div class="header">
-                                    <% if (movie.poster_path) { %>
-                                        <a href="/detail/<%= movie.id %>/<%= category %>"><img src="<%= url + movie.poster_path %>" alt="movie" class="movie-img">
+                                    <% if (tvShow.poster_path) { %>
+                                        <a href="/detail/<%= tvShow.id %>/<%= category %>"><img src="<%= url + tvShow.poster_path %>" alt="<%= tvShow.title %>" class="movie-img">
                                         </a>
                                         <% } else { %>
                                             <img src="image/no-image.jpg" alt="movie" class="movie-img">
@@ -41,21 +43,22 @@
                                 </div>
                                 <div class="body">
                                     <p class="font-sm anton-regular">
-                                        <%= movie.title %>
+                                        <%= tvShow.name %>
                                     </p>
-                                    <p class="">
-                                        <%= movie.release_date %>
+                                    <p class="date-release">
+                                        <%= tvShow.first_air_date %>
                                     </p>
+                                    
                                 </div>
                                 <div class="vote-average center">
                                     <span class="voting">
-                                        <%=movie.vote_average %>
+                    
+                                        <%=tvShow.vote_average %>
                                     </span>
                                 </div>
                             </div>
                             <% }); %>
                                 <% } %>
-                                   
 
 
                 </div>

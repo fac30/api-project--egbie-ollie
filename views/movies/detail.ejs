@@ -1,5 +1,5 @@
 
-<%- include('../partials/header/relativeHeader.ejs', {title: "Detauks " }) %>
+<%- include('../partials/header/relativeHeader.ejs', {title: "Details " }) %>
 
 
 
@@ -24,24 +24,36 @@
                     <div class="vote-average center">
                         <span class="voting">40</span>
                     </div>
-                    <p class="font-md padding-top-sm">Overview</p>
-                    <p class="padding-top-md">
+                    <p class="font-md padding-top-sm overview">Overview</p>
+                    <p class="padding-top-sm">
                         <%= movieData.overview %>
                     </p>
     
                     <div class="release-date flex-col padding-top-sm">
-                        <span class="font-md"><%= movieData.release_date %></span>
-                        <span><%= movieData.popularity %></span>
+                        <span class="font-sm"><%= movieData.release_date %></span>
+                        <span class="font-sm"><%= movieData.popularity %></span>
                     </div>
                     <div class="release-date flex-col padding-top-sm">
-                        <span class="font-md">Original language</span>
-                        <span><%= movieData.original_language %></span>
+                        <span class="font-sm">Original language</span>
+                        <span class="font-sm"><%= movieData.original_language %></span>
                     </div>
+                    
+                    <div class="flex-space-between">
+                        <div class="release-date flex-col padding-top-sm">
+                            <span class="font-sm">Release Date</span>
+                            <span class="font-sm"><%= movieData.release_date %></span>
+                        </div>
+
+                        <div class="release-date flex-col padding-top-sm">
+                            <span class="font-sm">Video</span>
+                            <span class="font-sm"><%= movieData.video %></span>
+                        </div>
     
-                    <div class="release-date flex-col padding-top-sm">
-                        <span class="font-md">Release Date</span>
-                        <span>2001-11-16</span>
                     </div>
+                    
+                   
+
+
                 </div>
             </div>
         </div>

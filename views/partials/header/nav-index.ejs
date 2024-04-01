@@ -20,11 +20,7 @@
                     |
 
                     <a href="/logout" class="font-md">logout</a>
-            <% } %>
-            
-          
-            
-            <% if (!isAdmin) { %>
+            <% } else { %> 
                 <div class="login">
                     <img src="image/alternate-sign-in.svg" alt="A login image" class="icon">
                     <a href="/login">Login</a>
@@ -35,20 +31,15 @@
                 </div>
             <% } %>
             
+          
+           
+            
         </div>
 
     </div>
 
-    <div class="nav-body flex-center padding-top-sm padding-bottom-sm berkshire-swash-regular font-md">
-        <a href="#" class="nav-link">Films</a>
-        <a href="#" class="nav-link">TV show</a>
+    
+    <%- include('./links.ejs') %>
 
-        <% if (userId) { %>
-            <a href="/landing-page" class="nav-link">Home</a>
-            <a href="/admin" class="nav-link">Dashboard</a>
-            <% } %>
-
-
-    </div>
 
 </nav>

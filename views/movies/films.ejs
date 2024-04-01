@@ -11,23 +11,28 @@
 
             <div class="container blur-border">
 
-               <%- include('../partials/forms/search-form.ejs') %>
 
                 <h1 class="padding-bottom-sm padding-top-sm center">Movies</h1>
-
-                <% if (searchQuery) {%> 
-                    <p class="center text-capitalize">Search term: <%= searchQuery %>
-                    <p class="center">Page <%= movies.page %> out of <%= movies.total_pages %></p>
-                    <p class="center">Total Results : <%= movies.total_results %></p>
-                <% } else { %>
-                    <p class="center">No results found by that query</p>
-                <%} %>
                 
-                </p>
+
+                <div class="info center">
+                    <% if (!movies) { %> 
+                        No Movies found
+                    <% } else {%>
+                      <p class="movie-subtitle">Dive into a world of cinematic wonder with our diverse movie selection.
+                         From gripping dramas to side-splitting comedies, embark on an unforgettable
+                          journey through the magic of film. Whether you're in the mood for romance,
+                           suspense, or laughter, we've got the perfect movie for every occasion.
+                            Get ready to be entertained
+                        </p>
+                        <% } %>
+                </div>
+              
+               
 
                 <div class="movies padding-top-lg">
 
-                    <% if (movies && movies.results && movies.results.length > 0) { %>
+                    <% if (movies) { %>
                         <% movies.results.forEach(function(movie) { %>
                             <div class="movie-card poppins-thin">
                                 <div class="header">
@@ -55,7 +60,6 @@
                             </div>
                             <% }); %>
                                 <% } %>
-                                   
 
 
                 </div>
@@ -65,7 +69,7 @@
 
     </main>
     <!-- The mains end here -->
-    <%- include('../partials/header/banner.ejs') %>
+
     <%- include('../partials/footer/footer.ejs') %>
 
 </body>
