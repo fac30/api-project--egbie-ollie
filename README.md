@@ -38,10 +38,6 @@ Currently the site is using px which is fixed in value and doesn't scale across 
 
 - **Consolidate Similar Styles**: Merge similar styles into reusable classes or components to avoid duplication and streamline code maintenance.
 
-- **Optimize Selectors**: Use efficient CSS selectors to target elements more precisely and minimize the browser's rendering workload.
-
-- **Group Related Styles**: Organize CSS rules logically by grouping related styles together, such as layout, typography, and colors, to improve code clarity and maintainability.
-
 - **Commenting**: Add descriptive comments to clarify the purpose and functionality of different sections or styles within the stylesheet, facilitating easier navigation and understanding
  
 ### Future Site Enhancements
