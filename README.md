@@ -1,12 +1,12 @@
 
 
 ### Clever Movies: Your Ultimate Movie and TV Series Companion
-CleverMovies is a dynamic web application that fetches movie and TV series data from an external API and provides a personalized experience for users. With CleverMovies, you can browse through a vast collection of titles, search for specific movies or TV series, and even track your favorites.
+CleverMovies is a dynamic web application that fetches movie and TV series data from an external API and provides a personalized experience for users. With CleverMovies, you can browse through a vast collection of titles, search for specific movies or TV series, and even track your favourites.
 
 ### Features
  - **Browse and Search**: Easily explore a wide range of movies and TV series using the search bars even a  guest.
  - **Details**: Provides detailed information about each movie, including title, release year, plot summary, and more.
-  - **Personalized Experience**: Create an account to save your favorite movies, rate them, etc.
+  - **Personalized Experience**: Create an account to save your favourite movies, rate them, etc.
  - **Administrator Privileges**: Admin users can manage the website's content globally, making changes to the homepage and other sections as needed
 - Displays a collection of movies on the homepage.
 
@@ -18,7 +18,44 @@ CleverMovies is a dynamic web application that fetches movie and TV series data 
  - 
 
 ADD MENU HERE
+
+
+## Things Todo
+
+### Making the Site Responsive
+
+ - Currently the site it is not resonsive and doesn't dapts seamlessly to different screen sizes, such as those of mobile phones, tablets, and desktops.
+
+
+### Converting px to rem
+
+Currently the site is using px which is fixed in value and doesn't scale across different screens. This will be converted to rems to ensure that text and other elements adjust proportionally based on the user's preferred font size settings and device characteristics.
+
+
+#### Tidy Up CSS:
+
+- **Remove Redundant Styles**: Identify and eliminate redundant or unused CSS rules to reduce file size and improve loading times.
+
+- **Consolidate Similar Styles**: Merge similar styles into reusable classes or components to avoid duplication and streamline code maintenance.
+
+- **Optimize Selectors**: Use efficient CSS selectors to target elements more precisely and minimize the browser's rendering workload.
+
+- **Group Related Styles**: Organize CSS rules logically by grouping related styles together, such as layout, typography, and colors, to improve code clarity and maintainability.
+
+- **Commenting**: Add descriptive comments to clarify the purpose and functionality of different sections or styles within the stylesheet, facilitating easier navigation and understanding
  
+### Future Site Enhancements
+- Allow users to choose which cache to delete from in order to free up space.
+- Enable users to add movies/TV shows to their favourites by clicking the favourite icon.
+- Implement a rating system for movies/TV shows, allowing users to rate their viewing experience.
+- Provide users with the ability to view or delete items stored in their search cache, currently the user can only see the number of search they have made in dashboard.
+- Allow users to manage their favoirite items by viewing or deleting them from their cache, alongside displaying the total count of favourite items.
+- Enable users to view and manage their movie/TV show ratings, including the option to delete them.
+- Display the number of API calls made to provide transparency to users regarding data retrieval.
+
+### Add some tests
+
+
 Get Started
 - Head over to https://www.themoviedb.org/signupand and sign up. 
 - You will then receive two keys an **API Key** and **API Read Access Token**
@@ -140,5 +177,4 @@ A brute force attack is a method used by attackers to gain unauthorized access t
 
 
 ### Additional message
-
-The code in here is not the new one and does not reflect the latest changes made. Will upload the latest version once I am finish with the Readme aas well as updating the code.
+Finish the rest of Readme to go here

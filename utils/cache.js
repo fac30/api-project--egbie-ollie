@@ -143,20 +143,12 @@ class MemoryDB {
         // Check if adding the new item exceeds localStorage limit
         const atCapacity = this._isLocalStorageAtCapacity(newItem);
         if (atCapacity) {
-            let table = tables[this._saveAs];
-
-            // Whenever a new item is being saved to a given table the memory database determines if there is enough
-            // space to save it in that given table. If there is not enough space the DB starts from the table the user wants
-            // to insert items into and starts deleting the oldest entries in order to make space for the new entry.
-            //
-            // However if the giventable that is going to be inserted in, it means that the room has to be made
-            // else where by deleting from a different table to make space before inserting in the user's given table
-            // This is done by calling this  method "this._determineTableToDelete"
-            // if (table.length === 0) {
-            //     table = this._determineTableToDelete(tables);
-            //     console.log("getting new table..")
-            // }           
-            this._deleteOldestEntriesFromTable(newItem, table);
+           
+            // Will implement later
+            // Goal whenever a user storage has reached it limits a message will
+            // be sent to the user in the admin dashboard informing them that they
+            // will no longer be able to add anymore storage and they should delete
+            // some items.
         }
 
 
@@ -236,8 +228,7 @@ class MemoryDB {
 
 
     getDefaultCache() {
-        const defaultCache = JSON.parse(this._memCache.cache.default);
-        return defaultCache;
+        return JSON.parse(this._memCache.cache.default);
     }
 
 
@@ -305,7 +296,7 @@ class MemoryDB {
         this.setCacheName("default");
 
         this._cache = {
-
+            searchTerms: [], // list of objects
             movies: [],
             tvShows: [],
             homePage: [],

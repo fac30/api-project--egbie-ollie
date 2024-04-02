@@ -9,7 +9,6 @@ import { fileURLToPath } from 'url';
 
 import dotenv from 'dotenv';
 import { getOptions } from './utils/getFetchOptions.js';
-import { getFormattedDate } from "./utils/dates.js";
 import { fetchOrUseCache } from "./utils/fetchHelper.js";
 import User from "./models/user.js";
 
@@ -47,6 +46,7 @@ app.set('view engine', 'ejs');
 
 
 import rateLimit from 'express-rate-limit';
+import { accessSync } from "fs";
 
 
 // // Create a rate limiter middleware
@@ -72,6 +72,8 @@ app.use((req, res, next) => {
   res.locals.isAdmin = req.session.isAdmin;
   next();
 });
+
+
 
 
 // Initialization the cache when the server starts
@@ -328,13 +330,11 @@ app.post("/movies", async (req, res) => {
   data.fetcError    = "Failed to fetch movie data : ";
   data.tableName    = searchQuery;
   const category    = CacheSaveTypes.search;
-  
   const username    = req.session.userId;
  
   const cache = username ? memoryDB.getCacheByName(username) : memoryDB.getDefaultCache();
   data.tableArray = cache.searchTerms;
-
-
+  
   try {
 
     movieData = await fetchOrUseCache(url, options, req, data, memoryDB);
@@ -344,8 +344,6 @@ app.post("/movies", async (req, res) => {
       return res.status(500).json({ error: "Failed to fetch your search query" });
   }
   
-
-
   return res.render("movies/movies.ejs", 
                     {movies: movieData.data, 
                     url:process.env.MOVIE_IMAGE_BASE_URL, 
@@ -365,26 +363,35 @@ app.get("/movies", async(req, res) => {
 
 
 // details page
-app.get("/detail/:id/:category", async(req, res) => {
+app.get("/detail/:id/:category/:searchQuery?", async(req, res) => {
  
-  const id       = req.params.id;   
-  const userId   = req.session.userId;
-  const category = req.params.category;;
+  const id          = req.params.id;   
+  const userId      = req.session.userId;
+  const category    = req.params.category;
+  const searchQuery = req.params.searchQuery || null;
   
   const cache    = userId ? memoryDB.getCacheByName(userId) : memoryDB.getDefaultCache();
   const movie    = new Movie(cache);
+  let results;
 
   movie.setCategory(category);
-  const results = movie.getMovieByID(id);
+
+  if (searchQuery) {
+    results = movie.findMovieByIdAndQuery(id, searchQuery);
+  } else {
+     results = movie.getMovieByID(id); 
+  }
   
+  
+  if (results === null) {
+    return res.redirect("/not-found")
+  }
 
   return res.render("movies/detail", { id: id, movieData: results, url: process.env.MOVIE_IMAGE_BASE_URL});
 
 ;
  
 });
-
-
 
 
 
@@ -405,6 +412,7 @@ app.get("/latest-films", async(req, res) => {
   data.tableArray   =  cache.movies;
   const category    = CacheSaveTypes.movies;
 
+  
   try {
 
     movieData = await fetchOrUseCache(url, options, req, data, memoryDB);
@@ -434,7 +442,8 @@ app.get("/tv-shows", async(req, res) => {
   data.error        = data.consoleError;
   data.saveAs       = CacheSaveTypes.tvShows;
   data.tableArray   =  cache.tvShows;
- 
+  
+  
   try {
   
       tvShowsData = await fetchOrUseCache(url, options, req, data, memoryDB );
@@ -598,6 +607,18 @@ app.post("/handle-form-submission", (req, res) => {
     
   return res.json(userFormObj);
 })
+
+
+app.get("/not-found", async(req, res)=> {
+  return res.render("errors/404.ejs");
+})
+
+
+app.get("*", async(req, res)=> {
+  return res.render("errors/404.ejs");
+})
+
+
 
 
 app.listen(PORT, () => {

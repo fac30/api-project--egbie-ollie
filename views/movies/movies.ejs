@@ -32,7 +32,7 @@
                             <div class="movie-card poppins-thin">
                                 <div class="header">
                                     <% if (movie.poster_path) { %>
-                                        <a href="/detail/<%= movie.id %>/<%= category %>"><img src="<%= url + movie.poster_path %>" alt="movie" class="movie-img">
+                                        <a href="/detail/<%= movie.id %>/<%= category %>/<%= searchQuery %>"><img src="<%= url + movie.poster_path %>" alt="movie" class="movie-img">
                                         </a>
                                         <% } else { %>
                                             <img src="image/no-image.jpg" alt="movie" class="movie-img">
