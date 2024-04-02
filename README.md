@@ -55,7 +55,7 @@ Whenever a user queries the API, the application stores the search results in it
 There are two solutions to this issue. Firstly, an implementation of a feature that allows users to delete previous cache storage. Secondly, is to develop the logic that prompts the application to fetch data from the API if it's not found in the cache (because it wasn't added because of sapce) but not store in the cache if the system is full. This ensures that even if data wasn't stored previously, the application can still retrieve it when necessary. Both solutions will be implemented to address this limitation. Additionally, a notification system will be introduced to inform users about their storage usage. Currently, users can view their available storage in their dashboard. However, notifications will also be implemented to alert users when they are nearing the storage limit or have exhausted their storage capacity. These notifications will be visible to users regardless if they are at their dashboard or not and will only be shown if they are nearing or at the end of the storage otherwise they can view they storage in dashboard.
 
 
-### Another problem is the email that checks whether a user email exists in the system is not working correctly 
+ Another problem is the email that checks whether a user email exists in the system is not working correctly 
 
 ### Get Started
 - Head over to https://www.themoviedb.org/signupand and sign up. 
