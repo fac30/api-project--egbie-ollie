@@ -1,73 +1,71 @@
 import { CacheSaveTypes } from "../utils/cache.js";
 
 
-class Movie{
-    constructor(memDbCacheInstant) {
-        this._memDb   = memDbCacheInstant;
-        this._category = null;
 
+class Movie {
+    constructor(memDbCache) {
+        this._memDb = memDbCache;
+        this._category = null;
+        this._tableMapping = {
+            LATEST_FILMS:"latest-films",
+            TV_SHOWS:"tv-shows",
+        }
+        
+        
         if (typeof this._memDb !== "object") {
             throw new Error("The memDB must be an object!");
         }
     }
 
     _mapCacheToTableName(category) {
-
-        switch(true) {
-            case category === CacheSaveTypes.movies:
-                return "latest-films";
-            case category === CacheSaveTypes.tvShows:
-                category 
-                return "tv-shows";
-            case category === CacheSaveTypes.search:
+        switch (category) {
+            case CacheSaveTypes.movies:
+                return this._tableMapping.LATEST_FILMS;
+            case CacheSaveTypes.tvShows:
+                return this._tableMapping.TV_SHOWS;
+            case CacheSaveTypes.search:
                 return CacheSaveTypes.search;
         }
     }
 
     get category() {
-        this._category
+        return this._category;
     }
 
     setCategory(category) {
         this._category = category;
     }
 
+    findMovieByIdAndQuery(id, searchQuery) {
+        return this._findMovieHelper(id, searchQuery);
+    }
 
     getMovieByID(id) {
+        return this._findMovieHelper(id);
+    }
 
+    _findMovieHelper(id, searchQuery = null) {
         if (!this._category) {
             throw new Error("The category is not set");
         }
 
+        let tableName;
 
-        const tableName = this._mapCacheToTableName(this._category);
-        console.log(this._category)
-        console.log(this._memDb)
-        const movies    = this._memDb?.[this._category]?.[0][tableName]?.[0].results; // list of movies objects
-        
-        console.log(tableName);
-        const movie = movies.find(movie => String(movie.id) === String(id));
-        return movie ? movie : null;
-     
-    }
-
-    getMovieByTitle(title) {
-        
-    }
-
-    getAllMovies() {
-        const mainSection = this._memDb.getCacheByName(CacheSaveTypes.default);
-        if (mainSection) {
-            const moviesArray = mainSection.movies[0].movies.results;
-            const pageNumber  = mainSection.movies[0].movies.page;
-            return [moviesArray, pageNumber];
+        if (searchQuery === null) {
+            tableName = this._mapCacheToTableName(this._category);
+        } else {
+            tableName = searchQuery.toLowerCase();
         }
+
+        const movies = this._memDb?.[this._category]?.[0][tableName]?.[0].results; // list of movie objects
+
+        if (movies) {
+            const movie = movies.find(movie => String(movie.id) === String(id));
+            return movie ? movie : null;
+        }
+        
+        return null;
     }
-
-    getAllTVShows() {
-
-    }
-
 }
 
 export default Movie;

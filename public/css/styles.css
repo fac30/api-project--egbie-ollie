@@ -1371,3 +1371,7 @@ footer .container > div,
 .overview {
     padding-top: 250px;
 }
+
+.not-found-header {
+    font-size: 25rem;
+}
