@@ -17,10 +17,6 @@ CleverMovies is a dynamic web application that fetches movie and TV series data 
  - **External AP**I: TMBD (The Movie Database) API
  - 
 
-ADD MENU HERE
-
-
-## Things Todo
 
 ### Making the Site Responsive
 
@@ -48,14 +44,20 @@ Currently the site is using px which is fixed in value and doesn't scale across 
 - Allow users to manage their favoirite items by viewing or deleting them from their cache, alongside displaying the total count of favourite items.
 - Enable users to view and manage their movie/TV show ratings, including the option to delete them.
 - Display the number of API calls made to provide transparency to users regarding data retrieval.
+- Allow the admin to disable accounts
+- Remove or adding priviledges to account e.g make them admin or not admin
+- 
 
 
 ### Know limitation problem that will be fixed 
 Whenever a user queries the API, the application stores the search results in its cache. Any subsequent searches are then performed using this cached data, including multiple queries for specific items. However, once the application's allocated 5MB cache space is filled, any further queries will result in a 404 error when attempting to view detailed information by clicking on an item's picture. This occurs because the cache doesn't contain the necessary data, preventing the application from retrieving it by its ID.
 
-There are two solutions to this issue. Firstly, an implementation of a feature that allows users to delete previous cache storage. Secondly, is to develop the logic that prompts the application to fetch data from the API if it's not found in the cache. This ensures that even if data wasn't stored previously, the application can still retrieve it when necessary.Both solutions will be implemented to address this limitation. Additionally, a notification system will be introduced to inform users about their storage usage. Currently, users can view their available storage in their dashboard. However, notifications will also be implemented to alert users when they are nearing the storage limit or have exhausted their storage capacity. These notifications will be visible to users regardless if they are at their dashboard or not and will only be shown if they are nearing or at the end of the storage otherwise they can view they storage in dashboard.
+There are two solutions to this issue. Firstly, an implementation of a feature that allows users to delete previous cache storage. Secondly, is to develop the logic that prompts the application to fetch data from the API if it's not found in the cache (because it wasn't added because of sapce) but not store in the cache if the system is full. This ensures that even if data wasn't stored previously, the application can still retrieve it when necessary. Both solutions will be implemented to address this limitation. Additionally, a notification system will be introduced to inform users about their storage usage. Currently, users can view their available storage in their dashboard. However, notifications will also be implemented to alert users when they are nearing the storage limit or have exhausted their storage capacity. These notifications will be visible to users regardless if they are at their dashboard or not and will only be shown if they are nearing or at the end of the storage otherwise they can view they storage in dashboard.
 
-Get Started
+
+### Another problem is the email that checks whether a user email exists in the system is not working correctly 
+
+### Get Started
 - Head over to https://www.themoviedb.org/signupand and sign up. 
 - You will then receive two keys an **API Key** and **API Read Access Token**
 
@@ -184,6 +186,22 @@ A brute force attack is a method used by attackers to gain unauthorized access t
 ![Image Description](https://drive.google.com/uc?id=1LI3hEc7JEclL2nHhbMug5aF5jhCn_AGs)
 
 
+### Lighthouse report
+I first ran the Lighthouse report on my browser, but I was advised by Lighthouse app to run it in incognito mode because there is a lot of overhead which affects the performance report. I followed this advice and re-ran the report. Below is my updated report
 
-### Additional message
-Finish the rest of Readme to go here
+![Lighthouse](https://drive.google.com/uc?export=view&id=1PxmJb0F29Wsq591PCY2a9qTgJm6u1MXC)
+
+## Conclusion
+
+Thank you for exploring our project! Hopefully this README has provided you with valuable insights into its objectives, features, and usage.
+
+
+
+### Acknowledgements
+
+- [TMBD API](https://www.themoviedb.org/?language=en-GB) - Used their API to be able to fetch movies and TV shows
+- [Canvas] (https://www.canva.com/) - For the moving banner gif located at the top of the home page
+
+
+
+
