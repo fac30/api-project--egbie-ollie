@@ -9,9 +9,9 @@
         <% if (userId) { %>
             <a href="/"> <img src="image/alternate-sign-in.svg" alt="A login image" class="icon"></a>
 
-            <% if (isAdmin) %>
-                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %>(Admin)</a> | 
-             <% { %> 
+            <% if (isAdmin) { %>
+                <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome sss <%= userId %>(Admin)</a> | 
+             <% } else { %> 
                 <a href="#" class="font-md text-capitalize anton-regular greeting-text"> Welcome <%= userId %></a> | 
               <% } %>
 
@@ -32,10 +32,7 @@
     </div>
 </div>
 
-<div class="nav-body flex-center padding-top-sm padding-bottom-sm berkshire-swash-regular font-md">
-    <a href="#" class="nav-link">Films</a>
-    <a href="#" class="nav-link">TV show</a>
+<%- include('./links.ejs') %>
 
-</div>
 
 </nav>

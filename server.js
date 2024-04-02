@@ -1,5 +1,5 @@
 import fetch from "node-fetch"; // for HTTP requests
-import express from "express"; // for HTTP requests
+import express, { response } from "express"; // for HTTP requests
 import session from 'express-session';
 
 
@@ -9,7 +9,8 @@ import { fileURLToPath } from 'url';
 
 import dotenv from 'dotenv';
 import { getOptions } from './utils/getFetchOptions.js';
-import { getFormattedDate } from "./utils/dates.js";
+import { fetchOrUseCache } from "./utils/fetchHelper.js";
+import User from "./models/user.js";
 
 
 
@@ -17,6 +18,7 @@ import { PasswordStrengthChecker, PasswordImplementer} from "./utils/password.js
 import { MemoryCache } from "./utils/memCache.js";
 import {MemoryDB, CacheSaveTypes} from "./utils/cache.js";
 import { saveDynamicPageSection } from "./utils/pageSectionService.js";
+import Movie from "./models/movie.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +28,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 let memoryDB   = null;
 
@@ -43,6 +46,7 @@ app.set('view engine', 'ejs');
 
 
 import rateLimit from 'express-rate-limit';
+import { accessSync } from "fs";
 
 
 // // Create a rate limiter middleware
@@ -53,11 +57,11 @@ const limiter = rateLimit({
 });
 
 // Apply the rate limiter to all requests
-// app.use(limiter);
+app.use(limiter);
 
 // Session Middleware
 app.use(session({
-  secret: 'your-secret-key',  // replace this with a real key
+  secret: SECRET_KEY,  
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Adjust secure option based on your deployment environment
@@ -70,6 +74,8 @@ app.use((req, res, next) => {
 });
 
 
+
+
 // Initialization the cache when the server starts
 function initializeCache(req, res, next) {
   const memCache = new MemoryCache();
@@ -77,20 +83,6 @@ function initializeCache(req, res, next) {
     memoryDB = new MemoryDB(memCache);
     memoryDB.createTables();
     
-    // memoryDB.setSaveAs(CacheSaveTypes.API_CALLS);
-
-    // const API_INFO = {API_NAME: "TMDB API", 
-    //                  noOfRequestsMade: 0,
-    //                  MOVIE_API_KEY: process.env.MOVIE_API_KEY,
-    //                  MOVIE_API_READ_ACCESS_TOKEN: process.env.MOVIE_API_READ_ACCESS_TOKEN,
-    //                  MOVIE_DATABASE_URL: process.env.MOVIE_DATABASE_URL,
-    //                  MOVIE_IMAGE_BASE_URL: process.env.MOVIE_IMAGE_BASE_URL
-    //                 }
-
-    // const itemObjectToSave = [API_INFO]
-
-    // memoryDB.setItemToSave("API_INFO", itemObjectToSave)
-    // memoryDB.save();
   }
 
   next();      
@@ -127,7 +119,6 @@ app.use(express.json()); // Middleware to parse JSON request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const authorizationKey = process.env.MOVIE_API_READ_ACCESS_TOKEN;
-const MOVIE_API_KEY    = process.env.MOVIE_API_KEY;
 const options          = getOptions(authorizationKey);
 
 
@@ -149,106 +140,165 @@ app.get("/joke", async (req, res) => {
 
 
 
+// Dashboard
+app.get("/admin", authenticateUser, async(req, res) => {
 
-app.post("/movies", async (req, res) => {
+  const userObj = memoryDB.getCacheByName(req.session.userId);
 
-  const searchQuery = req.body.search;
-  const url  = `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&include_adult=false&language=en-US&page=`;
+ 
+  if (!userObj) {
+    return res.status(500).send("Something went wrong!!");
+  }
 
+  const user = User.setDataFromCache(userObj);
 
-  const movieData = {}
-  const response = await fetch(url, options);
+  if (!user) {
+    throw new Error("Something went wrong the user was not found!!")
+  }
+
   
-      try {
-        if (!response.ok) {
-          movieData.error =  "Something went wrong and we couldn't find your search";
-        } else {
-          const movieJson = await response.json();
-          movieData.data  = movieJson;
-          // console.log(movieData.data)
-
-          if (req.session.userId) {
-            memoryDB.reset();
-            memoryDB.setCacheName(req.session.userId);
-            memoryDB.setSaveAs(CacheSaveTypes.search);
-
-            const movie = movieData.data.results.search((movie) => {
-              
-            })
-            memoryDB.setItemToSave(searchQuery, [ movieJson])
-       
-         } else {
-             memoryDB.reset();
-             memoryDB.setSaveAs(CacheSaveTypes.search);
-             memoryDB.setItemToSave(searchQuery.toLowerCase(), [ movieJson])
-            
-
-           
-             console.log(memoryDB.cache);
-             console.log("here")
-         }
-         memoryDB.save();
-
-        
-        }
-      } catch (error) {
-        console.error("Error fetching movie data:", error);
-        res.status(500).json({ error: "Failed to fetch movie data" });
-      }
-    
-
-    res.render("movies/movies", 
-          {movies: movieData.data, url:process.env.MOVIE_IMAGE_BASE_URL, searchQuery: searchQuery },
-          );
-    
-});
-
-
-
-
-app.get("/movies", async(req, res) => {
-  return res.render("movies/movies");
+  
+  res.render("admin/admin",  {joined: user.dateJoined, 
+                              hashedPassword: user.password,
+                              email: user.email,
+                              remainingSpace: memoryDB.remainingSpace,
+                              maximumSize: memoryDB.maximumSize,
+                              noOfSearchTermsMade: user.countSearchTerms(),
+                              ratings: user.countRatings(),
+                              favourites: user.countFavourites(),
+                              watchList: user.countWatchlistItems(),
+                              NO_OF_API_REQUESTS: user.countAPIRequests(),
+                              
+                          });
 })
 
 
 
-app.get("/detail/:id", async(req, res) => {
- 
-  const id     = req.params.id; // Access the ID from the UR 
-  const userId = req.session.userId;
+app.post("/admin", authenticateUser, async(req, res) => {
+  res.render("admin/admin");
+})
 
-  let cache;
-  let search;
+
+
+// Admin form
+app.post("/admin-form",  async(req, res) => {
   
-  if (userId) {
-     cache = memoryDB.getCacheByName(req.session.userId);
-     search = cache.searchTerms;
-  } else {
+
+  const username = req.body.username;
+  const password = req.body.password;
+  let invalid;
+
+  const userObj = memoryDB.getCacheByName(username);
+  if (userObj) {
+    const user  = User.setDataFromCache(userObj); 
+    
+    // Take the user's plaintext password entered and compared to the one in the database
+    const result = await PasswordImplementer.verifyPassword(password, user.password);
    
-    cache = memoryDB.getDefaultCache();
-    search = cache.searchTerms;
+    if (result && user.isActive && user.isAdmin) {
+      req.session.userId = user.username;
+      req.session.isAdmin = true;
+      return res.status(200).redirect("/landing-page");
+    }
+  
+}
+  invalid = "Incorrect email and username";  
+
+  res.render("authentication/admin-form", {invalid: invalid});
+})
+
+
+app.get("/admin-form",  async(req, res) => {
+  
+  let invalid;  
+
+  res.render("authentication/admin-form", {invalid: invalid});
+})
+
+
+
+// register
+app.get("/register", isAuthenticated, async(req, res) => {
+  res.render("authentication/register");
+})
+
+
+
+app.post("/register", async(req, res) => {
+
+  const form = req.body;
+
+  if (!form) {
+    return res.status(400).send("No form data provided");
+  }
+   
+    const user =  User.createNewUser(memoryDB, form.username);  
+    user.setUsername(form.username);
+    user.setEmail(form.email);
+   
+    const passwordImplementer = new PasswordImplementer(form.password);
+  
+    try {
+      const hashedPassword =  await passwordImplementer.hashPassword();
+      user.setPassword(hashedPassword);
+      user.save()
+     
+    } catch (error) {
+      res.status(500).send(`Something went wrong couldn't encrypt the password! ${error}`);
+    } 
+
+    return res.redirect("/login");
+
+})
+
+
+// login
+app.get("/login", isAuthenticated, async(req, res) => {
+  let invalid;
+  res.render("authentication/login", {invalid: invalid});
+})
+
+
+
+app.post("/login", isAuthenticated, async(req, res) => {
+
+  const username = req.body.username;
+  const password = req.body.password;
+  let invalid;
+
+  const userObj = memoryDB.getCacheByName(username);
+
+  // Takes the complicated nested user data stored in the cache and stores it a way that can be accessed by "dot notation"
+  const user  = User.setDataFromCache(userObj); 
+
+  if (user) {
+      
+      // Take the user's plaintext password entered and compared to the one in the database
+      const result = await PasswordImplementer.verifyPassword(password, user.password);
+      if (result && user.isActive) {
+        req.session.userId = user.username;
+        return res.status(200).redirect("/landing-page");
+      }
     
   }
-
-
-  if (search) {
-    
-    
-    search = search[0];
-    const result = memoryDB.parseMovieResults(search);
-    search = result.length > 0 ? result[0] : []
-
-  }
+  invalid = "Incorrect email and username";  
  
-  return res.render("movies/detail", { id: id, movieData: search, url: process.env.MOVIE_IMAGE_BASE_URL});
-;
- 
-});
+  return res.render("authentication/login", {invalid: invalid});
+  
+})
 
 
+//landing page
+app.get("/landing-page", async(req, res) => {
+  res.render("landing-page");
+})
+
+
+
+// index 
 app.get("/", async (req, res) => {
  
-  const tableName = "main";
+  const tableName = "default";
   const mainCache = memoryDB.getCacheByName(tableName);
 
   if (!mainCache) {
@@ -261,45 +311,155 @@ app.get("/", async (req, res) => {
     res.status(404).send("Something went wrong!!");
   }
 
-  // console.log(memoryDB)
   return res.render("index", { sectionArray: sectionArray});
 });
 
 
-app.get("/landing-page", async(req, res) => {
-  res.render("landing-page");
+
+// search movies
+app.post("/movies", async (req, res) => {
+
+  const searchQuery = req.body.search;
+  const url         = `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&include_adult=false&language=en-US&page=`;
+
+  const data        = {};
+  let movieData     = {};
+  data.error        = "Something went wrong and we couldn't find your search";
+  data.consoleError = "Error fetching movie data: ";
+  data.saveAs       = CacheSaveTypes.search;
+  data.fetcError    = "Failed to fetch movie data : ";
+  data.tableName    = searchQuery;
+  const category    = CacheSaveTypes.search;
+  const username    = req.session.userId;
+ 
+  const cache = username ? memoryDB.getCacheByName(username) : memoryDB.getDefaultCache();
+  data.tableArray = cache.searchTerms;
+  
+  try {
+
+    movieData = await fetchOrUseCache(url, options, req, data, memoryDB);
+
+  } catch (error) {
+      console.error(data.consoleError + error);
+      return res.status(500).json({ error: "Failed to fetch your search query" });
+  }
+  
+  return res.render("movies/movies.ejs", 
+                    {movies: movieData.data, 
+                    url:process.env.MOVIE_IMAGE_BASE_URL, 
+                    category: category,
+                    searchQuery: searchQuery },
+          );
+    
+});
+
+
+app.get("/movies", async(req, res) => {
+  const searchQuery = null;
+  const movies      = {};
+  return res.render("movies/movies.ejs", {searchQuery: searchQuery, movies: movies});
 })
 
 
-app.get("/admin", authenticateUser, async(req, res) => {
 
-  const user = memoryDB.getCacheByName(req.session.userId);
+// details page
+app.get("/detail/:id/:category/:searchQuery?", async(req, res) => {
  
-  if (!user) {
-    return res.status(500).send("Something went wrong!!");
+  const id          = req.params.id;   
+  const userId      = req.session.userId;
+  const category    = req.params.category;
+  const searchQuery = req.params.searchQuery || null;
+  
+  const cache    = userId ? memoryDB.getCacheByName(userId) : memoryDB.getDefaultCache();
+  const movie    = new Movie(cache);
+  let results;
+
+  movie.setCategory(category);
+
+  if (searchQuery) {
+    results = movie.findMovieByIdAndQuery(id, searchQuery);
+  } else {
+     results = movie.getMovieByID(id); 
+  }
+  
+  
+  if (results === null) {
+    return res.redirect("/not-found")
   }
 
-  const userAuth = user.authentication[0].authentication[0];
+  return res.render("movies/detail", { id: id, movieData: results, url: process.env.MOVIE_IMAGE_BASE_URL});
+
+;
+ 
+});
+
+
+
+
+app.get("/latest-films", async(req, res) => {
+
+
+  const url         = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
+  const data        = {}
+  let movieData     = {};
+  data.consoleError = "Error fetching the latest films";
+  data.fetcError    = "Failed to fetch the latest films";
+  data.tableName    = "latest-films";
+  data.error        = data.consoleError;
+  data.saveAs       = CacheSaveTypes.movies;
+  const username    = req.session.userId;
+  let cache         = username ? memoryDB.getCacheByName(username) : memoryDB.getDefaultCache();
+  data.tableArray   =  cache.movies;
+  const category    = CacheSaveTypes.movies;
+
   
-  res.render("admin/admin",  {joined: userAuth.joined, 
-                              hashedPassword: userAuth.password,
-                              email: userAuth.email,
-                              remainingSpace: memoryDB.remainingSpace,
-                              maximumSize: memoryDB.maximumSize,
-                              noOfSearchTermsMade: user.searchTerms.length,
-                              ratings: user.ratings.length,
-                              favourites: user.favourites.length,
-                              watchList: user.watchingList.length,
-                              NO_OF_API_REQUESTS: 0,
-                              
-                          });
+  try {
+
+    movieData = await fetchOrUseCache(url, options, req, data, memoryDB);
+
+  } catch (error) {
+    console.error(data.consoleError + error);
+    return res.status(500).json({ error: "Failed to fetch your search query" });
+  }
+  
+  return res.render("movies/films.ejs", {movies: movieData.data,
+                                        category: category,
+                                        url:process.env.MOVIE_IMAGE_BASE_URL })
+})
+
+
+app.get("/tv-shows", async(req, res) => {
+  
+  const url         = 'https://api.themoviedb.org/3/trending/tv/day?language=en-US';
+  const data        = {};  
+  const category    =  CacheSaveTypes.tvShows;   
+  const username    = req.session.userId;  
+  let tvShowsData   = {}
+  let cache         = username ? memoryDB.getCacheByName(username) : memoryDB.getDefaultCache();
+  data.consoleError = "Error fetching the latest TV shows";
+  data.fetcError    = "Failed to fetch the latest show";
+  data.tableName    = "tv-shows";
+  data.error        = data.consoleError;
+  data.saveAs       = CacheSaveTypes.tvShows;
+  data.tableArray   =  cache.tvShows;
+  
+  
+  try {
+  
+      tvShowsData = await fetchOrUseCache(url, options, req, data, memoryDB );
+   
+  } catch (error) {
+      console.error("Error fetching movie data:", error);
+    return res.status(500).json({ error: "Failed to fetch movie data" });
+  }
+
+  return res.render("movies/tv-shows.ejs", {tvShows: tvShowsData.data,
+                                            category: category,
+                                            url:process.env.MOVIE_IMAGE_BASE_URL })
 })
 
 
 
-app.post("/admin", authenticateUser, async(req, res) => {
-  res.render("admin/admin");
-})
 
 
 app.get("/change-password", authenticateUser, async(req, res) => {
@@ -319,10 +479,7 @@ app.post("/forgotten-password", async(req, res) => {
   res.render("passwords/forgotten-password");
 })
 
-app.get("/login", isAuthenticated, async(req, res) => {
-  let invalid;
-  res.render("authentication/login", {invalid: invalid});
-})
+
 
 
 app.get("/logout", authenticateUser, async (req, res) => {
@@ -336,124 +493,8 @@ app.get("/logout", authenticateUser, async (req, res) => {
 });
 
 
-app.post("/admin-form",  async(req, res) => {
-  
-
-  const username = req.body.username;
-  const password = req.body.password;
-  let invalid;
-
-  const userObj = memoryDB.getCacheByName(username);
-  if (userObj) {
-    let user =  userObj.authentication[0].authentication;
-
-    user = user[0]
-    
-    // Take the user's plaintext password entered and compared to the one in the database
-    const result = await PasswordImplementer.verifyPassword(password, user.password);
-   
-    if (result && user.isActive && user.isAdmin) {
-      req.session.userId = user.username;
-      req.session.isAdmin = true;
-      return res.status(200).redirect("/landing-page");
-    }
-  
-}
-  invalid = "Incorrect email and username";  
-
-  res.render("authentication/admin-form", {invalid: invalid});
-})
 
 
-
-app.get("/admin-form",  async(req, res) => {
-  
-
-  let invalid;  
-
-  res.render("authentication/admin-form", {invalid: invalid});
-})
-
-
-
-app.post("/login", isAuthenticated, async(req, res) => {
-
-  const username = req.body.username;
-  const password = req.body.password;
-  let invalid;
-
-  const userObj = memoryDB.getCacheByName(username);
-
-  if (userObj) {
-      let user =  userObj.authentication[0].authentication;
-
-      user = user[0]
-      
-      // Take the user's plaintext password entered and compared to the one in the database
-      const result = await PasswordImplementer.verifyPassword(password, user.password);
-     
-      if (result && user.isActive) {
-        req.session.userId = user.username;
-        return res.status(200).redirect("/landing-page");
-      }
-    
-  }
-  invalid = "Incorrect email and username";  
- 
-  return res.render("authentication/login", {invalid: invalid});
-  
-})
-
-
-app.get("/register", isAuthenticated, async(req, res) => {
-  res.render("authentication/register");
-})
-
-
-
-app.post("/register", async(req, res) => {
-
-  const form = req.body;
-
-  if (!form) {
-    return res.status(400).send("No form data provided");
-  }
-   
-    memoryDB.reset();
-    memoryDB.setCacheName(form.username);
-    memoryDB.createTables();
-    memoryDB.setSaveAs(CacheSaveTypes.authentication);
-
-    const passwordImplementer = new PasswordImplementer(form.password);
-    const date = new Date();
-
-    const userObj = {
-
-      username : form.username,
-      email    : form.email,
-      joined   : getFormattedDate(date),
-      isAdmin  : true,
-      isActive : true,
-     
-    }
-
-    try {
-      const hashedPassword =  await passwordImplementer.hashPassword();
-      userObj.password     =  hashedPassword;
-
-    } catch (error) {
-      res.status(500).send(`Something went wrong couldn't encrypt the password! ${error}`);
-    } 
-
-    // main.authentication[{authentication : [{}]}]
-    memoryDB.setItemToSave(CacheSaveTypes.authentication, [userObj]); // Table to save to
-    memoryDB.save();
-
-    console.log(memoryDB);
-    return res.redirect("/login");
-
-
-})
 
 
 app.post("/check-password-strength",  (req, res) => {
@@ -500,7 +541,7 @@ app.post("/is-email-unique", (req, res) => {
 
 app.post("/edit-homepage-section/:id", authenticateUser, (req, res) => {
   const sectionID = req.params.id;
-  const tableName = "main";
+  const tableName = "default";
   let sectionName = null;
 
   switch (sectionID) {
@@ -529,8 +570,6 @@ app.post("/edit-homepage-section/:id", authenticateUser, (req, res) => {
 });
 
 
-
-
 app.post("/handle-form-submission", (req, res) => {
 
   const userForm = req.body.userForm;
@@ -543,7 +582,6 @@ app.post("/handle-form-submission", (req, res) => {
   const userFormObj = {};
   let cacheObj = memoryDB.getCacheByName(userForm.username);
 
-  // console.log(memoryDB.getByEmail(userForm.email))
  
   switch (true) {
 
@@ -569,6 +607,18 @@ app.post("/handle-form-submission", (req, res) => {
     
   return res.json(userFormObj);
 })
+
+
+app.get("/not-found", async(req, res)=> {
+  return res.render("errors/404.ejs");
+})
+
+
+app.get("*", async(req, res)=> {
+  return res.render("errors/404.ejs");
+})
+
+
 
 
 app.listen(PORT, () => {

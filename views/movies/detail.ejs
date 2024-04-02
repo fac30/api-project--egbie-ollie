@@ -1,5 +1,5 @@
 
-<%- include('../partials/header/relativeHeader.ejs', {title: "Detauks " }) %>
+<%- include('../partials/header/relativeHeader.ejs', {title: "Details " }) %>
 
 
 
@@ -8,6 +8,7 @@
     <%- include('../partials/header/nav.ejs') %>
 
     <section id="movies-details">
+        
         <div class="container">
             <div class="backdrop">
                 <div class="backdrop-img-overlay"></div>
@@ -20,28 +21,54 @@
                 </div>
     
                 <div class="movie-detail">
-                    <h1><%= movieData.original_title %></h1>
+
+                    <% if(movieData.original_title) {%>
+                        <h1><%= movieData.original_title %></h1>
+                    <% } else { %>
+                        <h1><%= movieData.original_name %></h1>
+                    <% } %>
+                 
                     <div class="vote-average center">
-                        <span class="voting">40</span>
+                        <span class="voting"><%= movieData.vote_average %></span>
                     </div>
-                    <p class="font-md padding-top-sm">Overview</p>
-                    <p class="padding-top-md">
+                    <p class="font-md padding-top-sm overview">Overview</p>
+                    <p class="padding-top-sm">
                         <%= movieData.overview %>
                     </p>
     
                     <div class="release-date flex-col padding-top-sm">
-                        <span class="font-md"><%= movieData.release_date %></span>
-                        <span><%= movieData.popularity %></span>
+                        <span class="font-sm"><%= movieData.release_date %></span>
+                        <span class="font-sm"><%= movieData.popularity %></span>
                     </div>
                     <div class="release-date flex-col padding-top-sm">
-                        <span class="font-md">Original language</span>
-                        <span><%= movieData.original_language %></span>
+                        <span class="font-sm">Original language</span>
+                        <span class="font-sm"><%= movieData.original_language %></span>
                     </div>
+                    
+                    <div class="flex-space-between">
+                        <div class="release-date flex-col padding-top-sm">
+                            <span class="font-sm">Release Date</span>
+
+                            <% if(movieData.release_date) { %>
+                                <span class="font-sm"><%= movieData.release_date %></span>
+                            <%} else  { %>
+                                <span class="font-sm"><%= movieData.first_air_date %></span>
+                             <% } %>
+                        </div>
+
+                        <div class="release-date flex-col padding-top-sm">
+                            <span class="font-sm">Video</span>
+
+                            <% if (movieData.video)  { %>
+                                <span class="font-sm"><%= movieData.video %></span>
+                            <% } else { %>
+                                <span class="font-sm"><%= movieData.media_type %></span>
+                            <% } %>
+
+                        </div>
     
-                    <div class="release-date flex-col padding-top-sm">
-                        <span class="font-md">Release Date</span>
-                        <span>2001-11-16</span>
                     </div>
+                    
                 </div>
             </div>
         </div>

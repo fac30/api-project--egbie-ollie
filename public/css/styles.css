@@ -240,6 +240,9 @@ nav {
 }
 
 
+.padding-md {
+    padding: var(--padding-md);
+}
 /* 
 The margins */
 .margin-top-sm {
@@ -345,12 +348,18 @@ The margins */
     font-size: var(--font-md);
 }
 
+
 .search-btn {
     height: 40px;
     padding: 2px;
 }
 
-
+.secret-key-selection-field,
+.secret-key-inputfield {
+    height: 40px;
+    width: 100%;
+    cursor: pointer;
+}
 
 
 .subscription h1 {
@@ -436,10 +445,10 @@ footer .container > div,
 
   .movies {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     grid-template-rows: auto;
-    width: 90%;
-    /* gap: 4px; */
+    width: 93%;
+    gap: 4px;
     margin: auto;
     
   }
@@ -827,7 +836,7 @@ footer .container > div,
 }
 
 #movies-details .container {
-    height: 560px; /* Example height for demonstration */
+    height: 800px;
     cursor: pointer;
 }
 
@@ -851,7 +860,7 @@ footer .container > div,
     height: 450px;
   width: 300px;
   position: absolute;
-  top: 200px;
+  top: 400px;
   left: 100px;
 }
 
@@ -1239,4 +1248,130 @@ footer .container > div,
     padding: 20px;
     cursor: pointer;
 
+}
+
+
+#secretKeyGenerator > .container {
+
+    width: 40%;
+    padding: 30px;
+    padding: 70px;
+    margin: auto;
+    cursor: pointer;
+    box-shadow: var(--box-shadow-primary);
+  }
+
+ .secrek-key-buttons-container {
+    width: 100%;
+    border: 1px solid black;
+    cursor: pointer;
+    background: var(--background-color-primary);
+    color: white;
+    font-weight: bold;
+ }
+
+ .side-bar-msg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    background: white;
+    border-left: 2px solid black;
+    bottom: 0;
+    transition: display 0.5 ease-in-out;
+  }
+
+  .side-bar-msg .container {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#session-key-text-area {
+    width: 85%;
+  height: 85%;
+}
+
+.side-bar-msg  .button {
+    width: 85%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1px;
+}
+  
+.side-bar-msg .button > div {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.side-bar-msg .button > div a:hover {
+   color: white;
+   transform: scale(1.8);
+}
+
+.session-key-btn {
+    margin-top: 3px;
+    background: var(--background-color-primary);
+    width: 100%;
+}
+
+
+.secretKeyForm input,
+.secretKeyForm select {
+    font-size: var(--font-sm);
+    font-weight: 300;
+}
+
+.generator-banner {
+    background: var(--background-color-primary);
+}
+
+.movie-subtitle {
+    
+        width: 70%;
+        margin: auto;
+        color: black;
+        color: var(--background-color-primary);
+        font-weight: 500;
+      
+}
+.page-banner {
+    background: var(--background-color-primary);
+}
+
+/* Apply blur effect to the left and right sides of the border */
+.blur-border {
+   
+    border-radius: 30px; 
+    padding: 7px; 
+    position: relative;
+}
+
+/* Create pseudo-elements for left and right side blur */
+.blur-border:before, .blur-border:after {
+    content: "";
+    position: absolute;
+    top: 100px;
+    bottom: 20px;
+    width: 80px;
+    background-image: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,1)); /* Adjust gradient direction and colors */
+    filter: blur(7px); 
+}
+
+/* Position left blur */
+.blur-border:before {
+    left: -40px; 
+}
+
+/* Position right blur */
+.blur-border:after {
+    right: -10px;
+}
+
+.overview {
+    padding-top: 250px;
+}
+
+.not-found-header {
+    font-size: 25rem;
 }

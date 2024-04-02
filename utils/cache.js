@@ -22,7 +22,7 @@ class CacheSaveTypes {
     static API_CALLS = "API_CALLS";
     static main      = "main";
     static movies    = "movies";
-    static tvShows   = "tvshows";
+    static tvShows   = "tvShows";
     
 }
 
@@ -51,17 +51,6 @@ class MemoryDB {
 
     }
 
-
-
-    getAllMovies() {
-
-        const mainSection = this._memCache.getCacheByName(CacheSaveTypes.main);
-        if (mainSection) {
-            const moviesArray = mainSection.movies[0].movies.results;
-            const pageNumber  = mainSection.movies[0].movies.page;
-            return [moviesArray, pageNumber];
-        }
-    }
     /**
      * Create an id for the table
      */
@@ -105,7 +94,19 @@ class MemoryDB {
     }
     
     
-    
+    isSearchTermInCache(searchTerm, tableToSearch) {
+        
+        if (!Array.isArray(tableToSearch)) {
+            throw new Error("The table must be an Array!!")
+        }
+        for (const tableObj of tableToSearch) {
+            if (searchTerm.toLowerCase() in tableObj) {
+                return [true, tableObj[searchTerm.toLowerCase()][0]];
+            }
+        }
+        return [false, {}];
+    }
+
     /**
     * Sets the save type for the item to be saved. This ensures that when the item
     * is saved using the save method it is stored in the right table
@@ -142,20 +143,12 @@ class MemoryDB {
         // Check if adding the new item exceeds localStorage limit
         const atCapacity = this._isLocalStorageAtCapacity(newItem);
         if (atCapacity) {
-            let table = tables[this._saveAs];
-
-            // Whenever a new item is being saved to a given table the memory database determines if there is enough
-            // space to save it in that given table. If there is not enough space the DB starts from the table the user wants
-            // to insert items into and starts deleting the oldest entries in order to make space for the new entry.
-            //
-            // However if the giventable that is going to be inserted in, it means that the room has to be made
-            // else where by deleting from a different table to make space before inserting in the user's given table
-            // This is done by calling this  method "this._determineTableToDelete"
-            // if (table.length === 0) {
-            //     table = this._determineTableToDelete(tables);
-            //     console.log("getting new table..")
-            // }           
-            this._deleteOldestEntriesFromTable(newItem, table);
+           
+            // Will implement later
+            // Goal whenever a user storage has reached it limits a message will
+            // be sent to the user in the admin dashboard informing them that they
+            // will no longer be able to add anymore storage and they should delete
+            // some items.
         }
 
 
@@ -233,68 +226,9 @@ class MemoryDB {
         }
     }
 
-    /**
-     * Retrieves all items from the cache belong to a specific category.
-     * @returns {Array} An array of all items in the cache.
-     */
-    getAllItems(allCategories = true) {
-        // Implementation for getting all items
-    }
-
-    /**
-     * Sets the name of the storage for the cache items.
-     * @param {string} name - The name of the storage.
-     */
-    setItemStorageName(name) {
-        // Implementation for setting item storage name
-
-        // {"TV films": [ {}, {}, {}, {} .... {}]}
-    }
-
-
-    /**
-     * Finds items in the cache by name.
-     * @param {string} name - The name to search for.
-     * @param {number} limitToFetch - The maximum number of items to fetch.
-     * @returns {Array} An array of items found in the cache.
-     */
-    static findItemsByTitle(title, limitToFetch) {
-        // Implementation for finding items by name
-    }
-
-    /**
-     * Finds an item in the cache by ID.
-     * @param {number} id - The ID of the item to find.
-     * @param {Array} movieList - The list of movies to search.
-     * @returns {*} The item found in the cache, or undefined if not found.
-     */
-    findItemByID(id, movieList) {
-        return movieList.find(obj => obj.id === id);
-    }
-
-    parseMovieResults(data) {
-
-        if (!data) {
-            return [];
-        }
-        // Get an array of values from the object
-        const valuesArray = Object.values(data);
-      
-        
-        for (const value of valuesArray) {
-         
-          if (Array.isArray(value) && value[0] && value[0].results) {
-           
-            return value[0].results;
-          }
-        }
-      
-        return [];
-      }
 
     getDefaultCache() {
-        const defaultCache = JSON.parse(this._memCache.cache.default);
-        return defaultCache;
+        return JSON.parse(this._memCache.cache.default);
     }
 
 
@@ -329,13 +263,8 @@ class MemoryDB {
 
         let cache = [];
 
-    
-        if (this._cacheName.toLowerCase() === "Default Cache".toLowerCase()) {
-            cache = {
-                searchTerms: [], // list of objects
-                parentID: this._id,
-            };
-        } else {
+        this._createDefault();
+        if (this._cacheName.toLowerCase() != "default".toLowerCase()) {
             cache = {
                 searchTerms: [], // The Array reprenst a table nad list of objects 
                 favourites: [], // list of objects
@@ -343,16 +272,17 @@ class MemoryDB {
                 watchingList: [], // list of objects
                 keyWords: [], // list of objects
                 authentication: [],
+                movies: [],
+                tvShows: [],
                 profile: [],       // list of objects  
                 parentId: this._id,
             };
-
 
         }
 
         this._cache = cache;
         this.save();
-        this._createMainTable();
+
     }
 
     /**
@@ -360,19 +290,16 @@ class MemoryDB {
      * This includes recommended, featured, movies, and TV shows.
      * This cache is separate from the user's personal cache.
      */
-    _createMainTable() {
+    _createDefault() {
 
         const currentCacheName = this.cacheName;
-        this.setCacheName("main");
+        this.setCacheName("default");
 
         this._cache = {
-
-            recommended: [],
-            featured: [],
+            searchTerms: [], // list of objects
             movies: [],
             tvShows: [],
             homePage: [],
-            API_CALLS: [],
             parentId: this._id
 
         };
@@ -398,14 +325,11 @@ class MemoryDB {
        
         
         // Deferred implementation for later optimization.
-        // Objective: Check if the database is nearing capacity; if so, invoke '_deleteOldestEntriesFromTable'.
-        // This process systematically removes the oldest entries, ensuring at least 30% of storage is freed
-        // before adding new entries. Currently, it returns false, but this check occurs at the cache level.
-        // Consequently, if the database reaches full capacity, the cache ceases to accept new data.
-
-        // This '_deleteOldestEntriesFromTable' already does it but it is not wired to this functio
+        // Will Check if the cache is full. If the cache is full will alert the user
+        // and the user will chose what data to delete from the table
+        // For now it returns false
+        // The user will be able to delete from any table except for authentication and profile
         
-        // Return false if there is enough space available, indicating that the storage is not at capacity
         return false;
     }
 
@@ -430,69 +354,7 @@ class MemoryDB {
     }
 
 
-    /**
-     * Deletes the oldest entries from the cache within the entry which is a list until enough space is available,
-     *  based on timestamp.
-     * If no cache data is found or no entries are present, the method does nothing.
-     * @param {Object} newTableEntry - The new cache entry to be added.
-     * @param {Object} tableToDeleteFrom - The cache object containing lists from which entries will be deleted.
-     */
-    _deleteOldestEntriesFromTable(newTableEntry, tableToDeleteFrom) {
-
-        const removalPercentage = 0.3;  //  0.3 => 30%
-        const tableIndexToDelete = 0;    // deletes the oldest from the table
   
-        const spaceNeeded        = this._memCache.availableSpace - estimateObjectSize(newTableEntry);
-        const totalSpaceToBeFreed = spaceNeeded + (this._memCache.availableSpace * removalPercentage) // Delete the space need + 30% of the table entry
-
-        let running = true;
-
-        while (running) {
-
-            if (this._isLocalStorageAtCapacity(newTableEntry) && this._memCache.availableSpace > totalSpaceToBeFreed && tableToDeleteFrom.length > 0) {
-                this._memCache.removeTableItemByIndex(tableIndexToDelete, tableToDeleteFrom);
-
-            } else {
-                running = false;
-
-            }
-
-        }
-
-    }
-
-    /**
-      * Determines which table to delete based on certain criteria.
-      * @param {Object} cache - The cache object containing multiple tables.
-      * @returns {string} The name of the table to delete.
-     */
-    _determineTableToDelete(tables) {
-
-        let tableToDelete = null;
-
-        // Check if any table meets the criteria for deletion by deleting the user table in order of
-        // list importance
-        // The order of deletion is Keywords, searchTerms, ratings, watchingList, favourites
-
-        if (tables.keyWords.length > 0) {
-            tableToDelete = tables.keyWords;
-        } else if (tables.searchTerms.length > 0) {
-            tableToDelete = tables.searchTerms;
-        } else if (tables.ratings.length > 0) {
-            tableToDelete = tables.ratings;
-        } else if (tables.watchingList.length > 0) {
-            tableToDelete = tables.watchList;
-        } else if (tables.favourites.length > 0) {
-            tableToDelete = tables.watchList;
-        }
-
-        if (tableToDelete === null) {
-            throw new Error("Something went wrong -- couldn't find a table to delete!!");
-        }
-        return tableToDelete;
-
-    }
-
 }
 
 
