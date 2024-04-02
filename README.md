@@ -53,7 +53,11 @@ Currently the site is using px which is fixed in value and doesn't scale across 
 - Enable users to view and manage their movie/TV show ratings, including the option to delete them.
 - Display the number of API calls made to provide transparency to users regarding data retrieval.
 
-### Add some tests
+
+### Know limitation problem that will be fixed 
+Whenever a user queries the API, the application stores the search results in its cache. Any subsequent searches are then performed using this cached data, including multiple queries for specific items. However, once the application's allocated 5MB cache space is filled, any further queries will result in a 404 error when attempting to view detailed information by clicking on an item's picture. This occurs because the cache doesn't contain the necessary data, preventing the application from retrieving it by its ID.
+
+There are two solutions to this issue. Firstly, an implementation of a feature that allows users to delete previous cache storage. Secondly, is to develop the logic that prompts the application to fetch data from the API if it's not found in the cache. This ensures that even if data wasn't stored previously, the application can still retrieve it when necessary. Both solutions will be implemented to address this limitation.
 
 
 Get Started
@@ -95,6 +99,13 @@ Next run the html file called **secretKeyGenerator.html** either by live search 
 
 
 #### Now use that newly generate key and open an .env file and enter into the following fields. Your .env file should look something like this
+
+#### What is an .env file?
+A `.env` file, short for 'environment' file, is a plaintext configuration file commonly used in software development to store environment variables. These variables typically include sensitive or environment-specific information such as API keys, database connection strings, and other configuration settings.
+
+The `.env` file is usually kept separate from the main codebase and is not committed to version control systems like Git to prevent exposing sensitive information. Instead, developers create a `.env.example` file containing placeholders for the required variables and provide instructions for populating the actual `.env` file.
+
+
 
 ``` sh
  
@@ -153,6 +164,10 @@ Apart from the home page, the Film and TV show pages are dynamically generated a
 Once the application is running, any requests for the TV shows and Film pages are served directly from the cache. This caching mechanism ensures that the server does not repeatedly reach out to the API for the same data, significantly improving performance and reducing unnecessary API calls. This is also done for any searches you have done
 
 
+### Detailed view page
+![detailed view page](https://drive.google.com/uc?id=17Y1lvBRSC_4URUVsYtTD-9xrpn_Om0kR)
+
+
 ### Register ensuring that you use only the strongest password.
 ![Register](https://drive.google.com/uc?id=1aaxhS3HfpSXJTEyQv0EGKNYLi0ph021h)
 
@@ -172,7 +187,6 @@ A brute force attack is a method used by attackers to gain unauthorized access t
 
 ### Landing page
 ![Image Description](https://drive.google.com/uc?id=1LI3hEc7JEclL2nHhbMug5aF5jhCn_AGs)
-
 
 
 
